@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import InfoSection from "@/components/InfoSection";
-import { MapPin, Camera, Tree } from "lucide-react";
+import { MapPin, Camera, Trees } from "lucide-react";
 
 const wildlifeData = [
   {
@@ -123,7 +123,7 @@ const WildlifeSafari = () => {
                     : animal.description.mr}
                 </p>
                 <div className="flex items-center text-sm text-gray-500 mb-2">
-                  <Tree className="mr-2 h-4 w-4" />
+                  <Trees className="mr-2 h-4 w-4" />
                   {language === "en" ? "Best Time:" : "उत्तम वेळ:"}
                   {animal.bestTimeToSpot}
                 </div>
