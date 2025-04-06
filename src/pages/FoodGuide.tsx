@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -31,7 +32,7 @@ const foodItems = [
       mr: "अनोखे कोल्हापूरी मसाल्यासह फायरी रेड मटण करी",
     },
     image: "https://source.unsplash.com/featured/?curry,spicy",
-    spiceLevel: 3 as 1 | 2 | 3, // Fixed: explicitly type as a valid value
+    spiceLevel: 3 as 1 | 2 | 3,
     veg: false,
   },
   {
@@ -87,7 +88,7 @@ const foodItems = [
       mr: "नारळावर आधारित पांढरी चिकन करी, तांबडा रस्साचा सौम्य समकक्ष",
     },
     image: "https://source.unsplash.com/featured/?whitecurry,chicken",
-    spiceLevel: 2 as 1 | 2 | 3, // Fixed: explicitly type as a valid value
+    spiceLevel: 2 as 1 | 2 | 3,
     veg: false,
   },
 ];
@@ -97,7 +98,7 @@ const FoodGuide = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar onLanguageChange={(lang) => setLanguage(lang)} />
+      <Navbar />
 
       <InfoSection
         title={language === "en" ? "Food Guide" : "खाद्य मार्गदर्शक"}
