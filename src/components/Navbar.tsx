@@ -5,14 +5,22 @@ import { Button } from "@/components/ui/button";
 import { Globe, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const Navbar = () => {
+interface NavbarProps {
+  onLanguageChange?: (language: "en" | "mr") => void;
+}
+
+const Navbar = ({ onLanguageChange }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState<"en" | "mr">("en");
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const toggleLanguage = () => {
-    setLanguage(language === "en" ? "mr" : "en");
+    const newLanguage = language === "en" ? "mr" : "en";
+    setLanguage(newLanguage);
+    if (onLanguageChange) {
+      onLanguageChange(newLanguage);
+    }
   };
 
   const navLinks = [
@@ -24,13 +32,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm border-b">
+    <nav className="sticky top-0 z-30 bg-white/80 backdrop-blur-md shadow-sm border-b">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
           <div className="w-10 h-10 rounded-full forest-gradient flex items-center justify-center">
             <span className="text-white font-bold">RWS</span>
           </div>
-          <span className="font-semibold text-lg hidden md:block">
+          <span className="font-semibold text-lg">
             {language === "en" ? "Radhanagari Wildlife Sanctuary" : "राधानगरी वन्यजीव अभयारण्य"}
           </span>
         </Link>
@@ -80,7 +88,7 @@ const Navbar = () => {
       {/* Mobile navigation menu */}
       <div
         className={cn(
-          "fixed inset-0 bg-white z-20 md:hidden transition-transform duration-300 ease-in-out",
+          "fixed inset-0 bg-white z-40 md:hidden transition-transform duration-300 ease-in-out",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
@@ -91,7 +99,7 @@ const Navbar = () => {
                 <span className="text-white font-bold">RWS</span>
               </div>
               <span className="font-semibold">
-                {language === "en" ? "Radhanagari" : "राधानगरी"}
+                {language === "en" ? "Radhanagari Wildlife Sanctuary" : "राधानगरी वन्यजीव अभयारण्य"}
               </span>
             </div>
             <Button variant="ghost" size="icon" onClick={toggleMenu}>
