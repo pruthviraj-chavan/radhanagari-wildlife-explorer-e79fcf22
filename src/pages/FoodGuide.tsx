@@ -14,7 +14,7 @@ const FoodGuide = () => {
       description: "Fiery red mutton curry with Kolhapuri masala, known for its complex flavors and heat from red chilies.",
       image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800",
       isVeg: false,
-      isSpicy: 3
+      isSpicy: 3 as 1 | 2 | 3
     },
     {
       name: "Pandhra Rassa",
@@ -22,7 +22,7 @@ const FoodGuide = () => {
       description: "White coconut-based chicken broth that offers a more subtle flavor compared to its red counterpart.",
       image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800",
       isVeg: false,
-      isSpicy: 2
+      isSpicy: 2 as 1 | 2 | 3
     },
     {
       name: "Kolhapuri Chicken Sukka",
@@ -30,7 +30,7 @@ const FoodGuide = () => {
       description: "Dry chicken dish with bold spices, coconut, and a perfectly balanced heat level.",
       image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800",
       isVeg: false,
-      isSpicy: 3
+      isSpicy: 3 as 1 | 2 | 3
     },
     {
       name: "Doodh Saar",
@@ -38,7 +38,7 @@ const FoodGuide = () => {
       description: "Comforting spiced milk soup with rice, often enjoyed as a soothing counterpart to spicier dishes.",
       image: "https://images.unsplash.com/photo-1612103198005-b238154f4590?auto=format&fit=crop&w=800",
       isVeg: true,
-      isSpicy: 1
+      isSpicy: 1 as 1 | 2 | 3
     }
   ];
 
@@ -49,7 +49,7 @@ const FoodGuide = () => {
       description: "Thick, rustic bread made from local grains, traditionally cooked on an open flame for a smoky flavor.",
       image: "https://images.unsplash.com/photo-1605883705077-8d3d3cebe78c?auto=format&fit=crop&w=800",
       isVeg: true,
-      isSpicy: 1
+      isSpicy: 1 as 1 | 2 | 3
     },
     {
       name: "Bamboo Pickle",
@@ -57,7 +57,7 @@ const FoodGuide = () => {
       description: "Unique pickle made from young bamboo shoots, offering a tangy and slightly spicy flavor profile.",
       image: "https://images.unsplash.com/photo-1589135233689-8775d67b0978?auto=format&fit=crop&w=800",
       isVeg: true,
-      isSpicy: 2
+      isSpicy: 2 as 1 | 2 | 3
     },
     {
       name: "Forest Honey",
@@ -65,7 +65,7 @@ const FoodGuide = () => {
       description: "Pure, raw honey collected from the sanctuary's forests, with distinct floral notes from native plants.",
       image: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=800",
       isVeg: true,
-      isSpicy: 1
+      isSpicy: 1 as 1 | 2 | 3
     },
     {
       name: "Wild Mushroom Curry",
@@ -73,7 +73,7 @@ const FoodGuide = () => {
       description: "Seasonal curry made with foraged mushrooms, offering unique earthy flavors from the sanctuary.",
       image: "https://images.unsplash.com/photo-1582576163090-09d2897fa09a?auto=format&fit=crop&w=800",
       isVeg: true,
-      isSpicy: 2
+      isSpicy: 2 as 1 | 2 | 3
     }
   ];
 

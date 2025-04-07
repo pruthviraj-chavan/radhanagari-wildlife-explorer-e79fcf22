@@ -44,7 +44,7 @@ const WildlifeSafari = () => {
       category: "Mammal",
       description: "The largest wild cattle species, these impressive animals can weigh up to 1,000 kg. Often spotted in small herds near water bodies.",
       image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800",
-      rarity: "common"
+      rarity: "common" as "common" | "uncommon" | "rare" | "very-rare"
     },
     {
       name: "Leopard",
@@ -52,7 +52,7 @@ const WildlifeSafari = () => {
       category: "Mammal",
       description: "Elusive and adaptable big cat that prefers the densely forested areas. Best spotted during early morning safaris.",
       image: "https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=800",
-      rarity: "rare"
+      rarity: "rare" as "common" | "uncommon" | "rare" | "very-rare"
     },
     {
       name: "Sambar Deer",
@@ -60,7 +60,7 @@ const WildlifeSafari = () => {
       category: "Mammal",
       description: "Large deer species with distinctive antlers. Often seen in small groups near forest edges and water sources.",
       image: "https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=800",
-      rarity: "common"
+      rarity: "common" as "common" | "uncommon" | "rare" | "very-rare"
     },
     {
       name: "Indian Giant Squirrel",
@@ -68,7 +68,7 @@ const WildlifeSafari = () => {
       category: "Mammal", 
       description: "This colorful, large squirrel is endemic to India and spends most of its time in the forest canopy.",
       image: "https://images.unsplash.com/photo-1507666405895-422eee7d517f?auto=format&fit=crop&w=800",
-      rarity: "uncommon"
+      rarity: "uncommon" as "common" | "uncommon" | "rare" | "very-rare"
     }
   ];
 
@@ -79,7 +79,7 @@ const WildlifeSafari = () => {
       category: "Bird",
       description: "Distinguished by its large bill and casque, this bird is vital for seed dispersal in the forest ecosystem.",
       image: "https://images.unsplash.com/photo-1551085254-e96b210db58a?auto=format&fit=crop&w=800",
-      rarity: "uncommon"
+      rarity: "uncommon" as "common" | "uncommon" | "rare" | "very-rare"
     },
     {
       name: "Malabar Trogon",
@@ -87,7 +87,7 @@ const WildlifeSafari = () => {
       category: "Bird",
       description: "Colorful forest bird with a distinctive call. Males have a crimson underside while females are brownish.",
       image: "https://images.unsplash.com/photo-1591608971361-15c13bd50752?auto=format&fit=crop&w=800",
-      rarity: "rare"
+      rarity: "rare" as "common" | "uncommon" | "rare" | "very-rare"
     },
     {
       name: "Great Hornbill",
@@ -95,7 +95,7 @@ const WildlifeSafari = () => {
       category: "Bird",
       description: "Impressive forest bird with a large yellow and black casque. Known for its noisy wing beats during flight.",
       image: "https://images.unsplash.com/photo-1591608971361-15c13bd50752?auto=format&fit=crop&w=800",
-      rarity: "very-rare"
+      rarity: "very-rare" as "common" | "uncommon" | "rare" | "very-rare"
     },
     {
       name: "Kingfisher",
@@ -103,7 +103,7 @@ const WildlifeSafari = () => {
       category: "Bird",
       description: "Brightly colored bird often spotted near water bodies, diving for fish with remarkable precision.",
       image: "https://images.unsplash.com/photo-1555497402-94456d20fc2a?auto=format&fit=crop&w=800",
-      rarity: "common"
+      rarity: "common" as "common" | "uncommon" | "rare" | "very-rare"
     }
   ];
 
