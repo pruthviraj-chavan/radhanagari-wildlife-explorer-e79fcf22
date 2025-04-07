@@ -2,25 +2,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Globe, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [language, setLanguage] = useState<"en" | "mr">("en");
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "mr" : "en");
-  };
-
   const navLinks = [
-    { name: language === "en" ? "Home" : "मुख्यपृष्ठ", href: "/" },
-    { name: language === "en" ? "Hotels" : "हॉटेल्स", href: "/hotels-homestays" },
-    { name: language === "en" ? "Food" : "भोजन", href: "/food-guide" },
-    { name: language === "en" ? "Wildlife" : "वन्यजीव", href: "/wildlife-safari" },
-    { name: language === "en" ? "Blog" : "ब्लॉग", href: "/blog" },
+    { name: "Home", href: "/" },
+    { name: "Hotels", href: "/hotels-homestays" },
+    { name: "Food", href: "/food-guide" },
+    { name: "Wildlife", href: "/wildlife-safari" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -31,7 +27,7 @@ const Navbar = () => {
             <span className="text-white font-bold">RWS</span>
           </div>
           <span className="font-semibold text-lg hidden md:block">
-            {language === "en" ? "Radhanagari Wildlife Sanctuary" : "राधानगरी वन्यजीव अभयारण्य"}
+            Radhanagari Wildlife Sanctuary
           </span>
         </Link>
 
@@ -46,27 +42,10 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleLanguage}
-            className="rounded-full"
-          >
-            <Globe className="h-5 w-5" />
-            <span className="ml-1">{language === "en" ? "मराठी" : "EN"}</span>
-          </Button>
         </div>
 
         {/* Mobile navigation toggle */}
-        <div className="md:hidden flex items-center">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleLanguage}
-            className="mr-2"
-          >
-            <Globe className="h-5 w-5" />
-          </Button>
+        <div className="md:hidden">
           <Button
             variant="ghost"
             size="icon"
@@ -91,7 +70,7 @@ const Navbar = () => {
                 <span className="text-white font-bold">RWS</span>
               </div>
               <span className="font-semibold">
-                {language === "en" ? "Radhanagari" : "राधानगरी"}
+                Radhanagari
               </span>
             </div>
             <Button variant="ghost" size="icon" onClick={toggleMenu}>
