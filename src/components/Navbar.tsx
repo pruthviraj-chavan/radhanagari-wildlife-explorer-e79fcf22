@@ -47,33 +47,19 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo and company name */}
         <Link to="/" className="flex items-center gap-2">
-          {/* Mobile view: Show only the company name */}
-          <span
-            className={cn(
-              "font-semibold text-lg hidden md:block",
-              isMobile && "block"
-            )}
-          >
-            Radhanagari Wildlife Sanctuary
-          </span>
           {/* Desktop view: Show logo and company name */}
-          <div
-            className={cn(
-              "w-10 h-10 rounded-full forest-gradient flex items-center justify-center hidden md:block",
-              !isMobile && "block"
-            )}
-          >
-            <span className="text-white font-bold">RWS</span>
-          </div>
-          {/* Ensure the company name is shown only once on desktop */}
-          <span
-            className={cn(
-              "font-semibold text-lg hidden md:block",
-              !isMobile && "block"
-            )}
-          >
-            Radhanagari Wildlife Sanctuary
-          </span>
+          {!isMobile && (
+            <>
+              <div className="w-10 h-10 rounded-full forest-gradient flex items-center justify-center">
+                <span className="text-white font-bold">RWS</span>
+              </div>
+              <span className="font-semibold text-lg">Radhanagari Wildlife Sanctuary</span>
+            </>
+          )}
+          {/* Mobile view: Show only the company name */}
+          {isMobile && (
+            <span className="font-semibold text-lg">Radhanagari Wildlife Sanctuary</span>
+          )}
         </Link>
 
         {/* Desktop navigation */}
@@ -89,7 +75,9 @@ const Navbar = () => {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-gray-100">Visit</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-gray-100">
+                  Visit
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
                     {visitLinks.map((link) => (
