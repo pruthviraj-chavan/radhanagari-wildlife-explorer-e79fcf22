@@ -50,9 +50,7 @@ const Navbar = () => {
           {/* Desktop view: Show logo and company name */}
           {!isMobile && (
             <>
-              <div className="w-10 h-10 rounded-full forest-gradient flex items-center justify-center">
-                <span className="text-white font-bold">RWS</span>
-              </div>
+             
               <span className="font-semibold text-lg">Radhanagari Wildlife Sanctuary</span>
             </>
           )}
