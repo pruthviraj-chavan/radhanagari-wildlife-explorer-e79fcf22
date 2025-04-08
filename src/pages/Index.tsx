@@ -67,7 +67,7 @@ const Index = () => {
     },
     {
       title: "Local Food Guide",
-      description: "Taste authentic Kolhapuri cuisine and traditional forest recipes that make Radhanagari a culinary delight.",
+      description: "Taste authentic Kolhapuri cuisine and traditional forest recipes that make Radhanagari a culinary delight. Visit Now",
       image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800",
       link: "/food-guide",
       gradient: "wildflower-gradient"
