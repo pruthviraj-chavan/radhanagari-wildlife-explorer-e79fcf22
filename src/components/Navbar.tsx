@@ -65,10 +65,11 @@ const Navbar = () => {
           >
             <span className="text-white font-bold">RWS</span>
           </div>
+          {/* Ensure the company name is shown only once on desktop */}
           <span
             className={cn(
               "font-semibold text-lg hidden md:block",
-              !isMobile && "hidden"
+              !isMobile && "block"
             )}
           >
             Radhanagari Wildlife Sanctuary
@@ -151,7 +152,7 @@ const Navbar = () => {
               className="flex items-center gap-2"
               onClick={toggleMenu}
             >
-              <span className="font-semibold text-lg">Radhanagari Wildlife </span>
+              <span className="font-semibold text-lg">Radhanagari Wildlife Sanctuary</span>
             </Link>
             <Button variant="ghost" size="icon" onClick={toggleMenu}>
               <X className="h-5 w-5" />
