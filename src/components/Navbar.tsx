@@ -1,9 +1,23 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,15 +26,22 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Hotels", href: "/hotels-homestays" },
     { name: "Food", href: "/food-guide" },
     { name: "Wildlife", href: "/wildlife-safari" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
 
+  const visitLinks = [
+    { name: "Hotels & Homestays", href: "/hotels-homestays" },
+    { name: "Barber Shops", href: "/barber-shops" },
+    { name: "Computer Training", href: "/computer-training" },
+    { name: "Lodges", href: "/lodges" },
+    { name: "Supermarkets", href: "/supermarkets" },
+  ];
+
   return (
-    <nav className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm border-b">
+    <nav className="sticky top-0 z-10 bg-white shadow-sm border-b">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
           <div className="w-10 h-10 rounded-full forest-gradient flex items-center justify-center">
@@ -33,7 +54,42 @@ const Navbar = () => {
 
         {/* Desktop navigation */}
         <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
+          <Link
+            to="/"
+            className="text-gray-700 hover:text-primary transition-colors"
+          >
+            Home
+          </Link>
+          
+          {/* Visit Dropdown */}
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-gray-100">Visit</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px] lg:grid-cols-2">
+                    {visitLinks.map((link) => (
+                      <li key={link.href}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to={link.href}
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">
+                              {link.name}
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+          
+          {/* Other nav links */}
+          {navLinks.slice(1).map((link) => (
             <Link
               key={link.href}
               to={link.href}
@@ -59,35 +115,56 @@ const Navbar = () => {
       {/* Mobile navigation menu */}
       <div
         className={cn(
-          "fixed inset-0 bg-white z-20 md:hidden transition-transform duration-300 ease-in-out",
+          "fixed inset-0 z-50 md:hidden transform transition-transform duration-300 ease-in-out bg-white",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        <div className="flex flex-col h-full">
-          <div className="flex justify-between items-center p-4 border-b">
-            <div className="flex items-center gap-2">
+        <div className="flex flex-col min-h-screen">
+          {/* Mobile header */}
+          <div className="flex justify-between items-center p-4 border-b bg-white">
+            <Link to="/" className="flex items-center gap-2" onClick={toggleMenu}>
               <div className="w-10 h-10 rounded-full forest-gradient flex items-center justify-center">
                 <span className="text-white font-bold">RWS</span>
               </div>
-              <span className="font-semibold">
-                Radhanagari
-              </span>
-            </div>
+              <span className="font-semibold">Radhanagari</span>
+            </Link>
             <Button variant="ghost" size="icon" onClick={toggleMenu}>
               <X className="h-5 w-5" />
             </Button>
           </div>
-          <div className="flex flex-col p-4 space-y-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className="text-xl py-2 border-b border-gray-100"
-                onClick={toggleMenu}
-              >
-                {link.name}
-              </Link>
-            ))}
+
+          {/* Mobile menu items */}
+          <div className="flex-1 overflow-y-auto">
+            <div className="p-4">
+              {/* Regular links */}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="block py-3 text-lg border-b border-gray-100"
+                  onClick={toggleMenu}
+                >
+                  {link.name}
+                </Link>
+              ))}
+
+              {/* Visit section with nested links */}
+              <div className="py-3 border-b border-gray-100">
+                <div className="text-lg font-medium mb-2">Visit</div>
+                <div className="pl-4 space-y-2">
+                  {visitLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      className="block py-2 text-gray-700"
+                      onClick={toggleMenu}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
