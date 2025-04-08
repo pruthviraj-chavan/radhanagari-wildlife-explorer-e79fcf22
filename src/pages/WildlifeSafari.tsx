@@ -1,4 +1,5 @@
 
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import InfoSection from "@/components/InfoSection";
@@ -7,11 +8,22 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { 
-  Calendar, Clock, IndianRupee, MapPin, Clipboard, Camera, Info
+  Calendar, Clock, IndianRupee, MapPin, Clipboard, Camera, Info, Video, Image as ImageIcon
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { VideoCard } from "@/components/VideoCard";
+import { GalleryItem } from "@/components/GalleryItem";
+import { AdPopup } from "@/components/AdPopup";
 
 const WildlifeSafari = () => {
+  const [showAd, setShowAd] = useState(false);
+
+  useEffect(() => {
+    // Show ad popup when component mounts
+    setShowAd(true);
+  }, []);
+
   // Safari details
   const safariDetails = [
     {
@@ -44,7 +56,7 @@ const WildlifeSafari = () => {
       category: "Mammal",
       description: "The largest wild cattle species, these impressive animals can weigh up to 1,000 kg. Often spotted in small herds near water bodies.",
       image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800",
-      rarity: "common" as "common" | "uncommon" | "rare" | "very-rare"
+      rarity: "common" as const
     },
     {
       name: "Leopard",
@@ -52,7 +64,7 @@ const WildlifeSafari = () => {
       category: "Mammal",
       description: "Elusive and adaptable big cat that prefers the densely forested areas. Best spotted during early morning safaris.",
       image: "https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=800",
-      rarity: "rare" as "common" | "uncommon" | "rare" | "very-rare"
+      rarity: "rare" as const
     },
     {
       name: "Sambar Deer",
@@ -60,7 +72,7 @@ const WildlifeSafari = () => {
       category: "Mammal",
       description: "Large deer species with distinctive antlers. Often seen in small groups near forest edges and water sources.",
       image: "https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=800",
-      rarity: "common" as "common" | "uncommon" | "rare" | "very-rare"
+      rarity: "common" as const
     },
     {
       name: "Indian Giant Squirrel",
@@ -68,7 +80,7 @@ const WildlifeSafari = () => {
       category: "Mammal", 
       description: "This colorful, large squirrel is endemic to India and spends most of its time in the forest canopy.",
       image: "https://images.unsplash.com/photo-1507666405895-422eee7d517f?auto=format&fit=crop&w=800",
-      rarity: "uncommon" as "common" | "uncommon" | "rare" | "very-rare"
+      rarity: "uncommon" as const
     }
   ];
 
@@ -79,7 +91,7 @@ const WildlifeSafari = () => {
       category: "Bird",
       description: "Distinguished by its large bill and casque, this bird is vital for seed dispersal in the forest ecosystem.",
       image: "https://images.unsplash.com/photo-1551085254-e96b210db58a?auto=format&fit=crop&w=800",
-      rarity: "uncommon" as "common" | "uncommon" | "rare" | "very-rare"
+      rarity: "uncommon" as const
     },
     {
       name: "Malabar Trogon",
@@ -87,7 +99,7 @@ const WildlifeSafari = () => {
       category: "Bird",
       description: "Colorful forest bird with a distinctive call. Males have a crimson underside while females are brownish.",
       image: "https://images.unsplash.com/photo-1591608971361-15c13bd50752?auto=format&fit=crop&w=800",
-      rarity: "rare" as "common" | "uncommon" | "rare" | "very-rare"
+      rarity: "rare" as const
     },
     {
       name: "Great Hornbill",
@@ -95,7 +107,7 @@ const WildlifeSafari = () => {
       category: "Bird",
       description: "Impressive forest bird with a large yellow and black casque. Known for its noisy wing beats during flight.",
       image: "https://images.unsplash.com/photo-1591608971361-15c13bd50752?auto=format&fit=crop&w=800",
-      rarity: "very-rare" as "common" | "uncommon" | "rare" | "very-rare"
+      rarity: "very-rare" as const
     },
     {
       name: "Kingfisher",
@@ -103,13 +115,139 @@ const WildlifeSafari = () => {
       category: "Bird",
       description: "Brightly colored bird often spotted near water bodies, diving for fish with remarkable precision.",
       image: "https://images.unsplash.com/photo-1555497402-94456d20fc2a?auto=format&fit=crop&w=800",
-      rarity: "common" as "common" | "uncommon" | "rare" | "very-rare"
+      rarity: "common" as const
+    }
+  ];
+
+  // Wildlife Videos
+  const videos = [
+    {
+      title: "Indian Bison in Radhanagari",
+      embedUrl: "https://www.youtube.com/embed/4xJoVCjBUco",
+      description: "A herd of Indian Bison (Gaur) spotted during morning safari."
+    },
+    {
+      title: "Birds of Radhanagari",
+      embedUrl: "https://www.youtube.com/embed/8BHGrj6a9Ww",
+      description: "The diverse bird species found in the sanctuary."
+    },
+    {
+      title: "Leopard Sighting",
+      embedUrl: "https://www.youtube.com/embed/ot-vX1QLzjA",
+      description: "Rare footage of a leopard walking through the forest."
+    },
+    {
+      title: "Dajipur Sanctuary Tour",
+      embedUrl: "https://www.youtube.com/embed/vU6z6QkJdgk",
+      description: "A complete tour guide of the Dajipur range."
+    },
+    {
+      title: "Monsoon in Radhanagari",
+      embedUrl: "https://www.youtube.com/embed/PjGkVCAo8Fw",
+      description: "The lush greenery during monsoon season."
+    },
+    {
+      title: "Wildlife Conservation Efforts",
+      embedUrl: "https://www.youtube.com/embed/RcmrbNRK-jY",
+      description: "Local conservation initiatives to protect biodiversity."
+    },
+    {
+      title: "Night Safari Experience",
+      embedUrl: "https://www.youtube.com/embed/qnNmGQosLjg",
+      description: "Experience the jungle after dark with special night safaris."
+    },
+    {
+      title: "Butterfly Paradise",
+      embedUrl: "https://www.youtube.com/embed/gJpT_1WsXng",
+      description: "The colorful butterfly species found in the sanctuary."
+    },
+    {
+      title: "Radhanagari Dam",
+      embedUrl: "https://www.youtube.com/embed/gFMDzhPG8d0",
+      description: "The scenic beauty around Radhanagari dam."
+    },
+    {
+      title: "Wildlife Photography Tips",
+      embedUrl: "https://www.youtube.com/embed/7ZVyNjKSr0M",
+      description: "Expert tips for wildlife photography in Radhanagari."
+    }
+  ];
+
+  // Gallery images
+  const galleryImages = [
+    {
+      title: "Indian Bison",
+      image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800"
+    },
+    {
+      title: "Leopard",
+      image: "https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=800"
+    },
+    {
+      title: "Sambar Deer",
+      image: "https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=800"
+    },
+    {
+      title: "Hornbill",
+      image: "https://images.unsplash.com/photo-1551085254-e96b210db58a?auto=format&fit=crop&w=800"
+    },
+    {
+      title: "Kingfisher",
+      image: "https://images.unsplash.com/photo-1555497402-94456d20fc2a?auto=format&fit=crop&w=800"
+    },
+    {
+      title: "Forest Trail",
+      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800"
+    },
+    {
+      title: "Radhanagari Dam",
+      image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800"
+    },
+    {
+      title: "Butterfly",
+      image: "https://images.unsplash.com/photo-1452570053594-1b985d6ea890?auto=format&fit=crop&w=800"
+    }
+  ];
+
+  // Waterfalls
+  const waterfalls = [
+    {
+      name: "Dajipur Waterfall",
+      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800",
+      description: "A majestic waterfall near Dajipur village, surrounded by thick forest. Best visited during monsoon.",
+      location: "Near Dajipur Village"
+    },
+    {
+      name: "Manmodi Waterfall",
+      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800",
+      description: "A scenic waterfall that comes to life during the rainy season with breathtaking views.",
+      location: "Manmodi Region"
+    },
+    {
+      name: "Radhanagari Falls",
+      image: "https://images.unsplash.com/photo-1513125370-3438ccd8f342?auto=format&fit=crop&w=800",
+      description: "Located near the sanctuary entrance, this waterfall offers easy access and beautiful scenery.",
+      location: "Near Sanctuary Entrance"
+    },
+    {
+      name: "Hidden Forest Falls",
+      image: "https://images.unsplash.com/photo-1565621759698-b02b4fbe6312?auto=format&fit=crop&w=800",
+      description: "A secluded waterfall deep in the forest, perfect for adventure seekers and nature lovers.",
+      location: "Deep Forest Area"
+    },
+    {
+      name: "Kalamma Falls",
+      image: "https://images.unsplash.com/photo-1546514355-7fdc90ccbd03?auto=format&fit=crop&w=800",
+      description: "Named after the nearby temple, this waterfall offers a spiritual and natural experience.",
+      location: "Near Kalamma Temple"
     }
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      
+      {showAd && <AdPopup onClose={() => setShowAd(false)} />}
       
       <main className="flex-grow">
         <Hero 
@@ -144,6 +282,79 @@ const WildlifeSafari = () => {
                 Book Safari Now
               </Button>
             </Link>
+          </div>
+        </InfoSection>
+        
+        {/* Media Tabs Section (Videos & Gallery) */}
+        <InfoSection
+          title="Explore Radhanagari Virtually"
+          subtitle="Videos and images from the wildlife sanctuary"
+          className="bg-gray-50"
+        >
+          <Tabs defaultValue="videos" className="max-w-5xl mx-auto">
+            <div className="flex justify-center mb-6">
+              <TabsList>
+                <TabsTrigger value="videos" className="flex items-center">
+                  <Video className="mr-2 h-4 w-4" />
+                  Videos
+                </TabsTrigger>
+                <TabsTrigger value="gallery" className="flex items-center">
+                  <ImageIcon className="mr-2 h-4 w-4" />
+                  Photo Gallery
+                </TabsTrigger>
+              </TabsList>
+            </div>
+
+            <TabsContent value="videos">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {videos.map((video, index) => (
+                  <VideoCard
+                    key={index}
+                    title={video.title}
+                    embedUrl={video.embedUrl}
+                    description={video.description}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="gallery">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {galleryImages.map((image, index) => (
+                  <GalleryItem
+                    key={index}
+                    title={image.title}
+                    image={image.image}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </InfoSection>
+
+        {/* Waterfalls Section */}
+        <InfoSection
+          title="Waterfalls of Radhanagari"
+          subtitle="Discover the scenic waterfalls in and around the sanctuary"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {waterfalls.map((waterfall, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <img 
+                  src={waterfall.image} 
+                  alt={waterfall.name} 
+                  className="w-full h-56 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-1">{waterfall.name}</h3>
+                  <p className="text-gray-500 text-sm mb-2 flex items-center">
+                    <MapPin className="h-4 w-4 mr-1" />
+                    {waterfall.location}
+                  </p>
+                  <p className="text-gray-600 text-sm">{waterfall.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </InfoSection>
         

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -18,10 +19,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const isMobile = useIsMobile();
+  
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = [
@@ -41,7 +44,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-10 bg-white shadow-sm border-b">
+    <nav className="sticky top-0 z-50 bg-white shadow-sm border-b">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
           <div className="w-10 h-10 rounded-full forest-gradient flex items-center justify-center">
@@ -67,7 +70,7 @@ const Navbar = () => {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent hover:bg-gray-100">Visit</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px] lg:grid-cols-2">
+                  <ul className="grid w-[400px] gap-3 p-4">
                     {visitLinks.map((link) => (
                       <li key={link.href}>
                         <NavigationMenuLink asChild>
@@ -119,7 +122,7 @@ const Navbar = () => {
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col h-full">
           {/* Mobile header */}
           <div className="flex justify-between items-center p-4 border-b bg-white">
             <Link to="/" className="flex items-center gap-2" onClick={toggleMenu}>

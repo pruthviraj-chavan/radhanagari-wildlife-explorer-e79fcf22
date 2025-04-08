@@ -7,32 +7,57 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import ShopCard from "@/components/ShopCard";
+import { AdPopup } from "@/components/AdPopup";
 
 const ComputerTraining = () => {
-  const [priceRange, setPriceRange] = useState([1000, 10000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([1000, 10000]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showAd, setShowAd] = useState(false);
+
+  useEffect(() => {
+    // Show ad popup when component mounts
+    setShowAd(true);
+  }, []);
 
   const trainingCenters = [
     {
-      name: "Digital Skills Academy",
+      name: "Insight Computers Radhanagari",
       image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800",
       price: "₹2,500 - ₹8,000",
       rating: 4.8,
-      description: "Comprehensive computer training courses from basic to advanced, with job placement assistance.",
-      features: ["Basic Computer Skills", "MS Office", "Web Development", "Graphic Design"],
-      location: "Near Bus Stand"
+      description: "Official MS-CIT center offering comprehensive computer training courses with job placement assistance.",
+      features: ["MS-CIT", "Tally Prime", "Programming", "MS Office"],
+      location: "Near Bus Stand, Radhanagari"
     },
     {
-      name: "Tech Career Institute",
+      name: "Digital Skills Academy",
       image: "https://images.unsplash.com/photo-1594729095022-e2f6d2eece9c?auto=format&fit=crop&w=800",
       price: "₹3,000 - ₹9,500",
       rating: 4.6,
       description: "Industry-focused training with practical projects and internship opportunities.",
-      features: ["Programming", "Digital Marketing", "Data Analysis", "Certificate Courses"],
-      location: "Main Road"
+      features: ["Web Development", "Digital Marketing", "Data Analysis", "Certificate Courses"],
+      location: "Main Road, Radhanagari"
+    },
+    {
+      name: "Tech Career Institute",
+      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800",
+      price: "₹1,500 - ₹4,000",
+      rating: 4.5,
+      description: "Affordable computer education tailored for rural students with flexible timings.",
+      features: ["Basic Computing", "Tally", "DTP", "MS-CIT"],
+      location: "Village Center"
+    },
+    {
+      name: "MKCL Advanced Center",
+      image: "https://images.unsplash.com/photo-1598986646512-9330bcc4c0dc?auto=format&fit=crop&w=800",
+      price: "₹5,000 - ₹12,000",
+      rating: 4.9,
+      description: "Official MKCL center offering MS-CIT and advanced courses with expert instructors.",
+      features: ["MS-CIT", "Advanced Excel", "Advanced Tally", "Programming"],
+      location: "Near Post Office, Radhanagari"
     },
     {
       name: "Rural IT Solutions",
@@ -42,15 +67,6 @@ const ComputerTraining = () => {
       description: "Affordable computer education tailored for rural students with flexible timings.",
       features: ["Basic Computing", "Tally", "DTP", "Language Support"],
       location: "Village Center"
-    },
-    {
-      name: "Advanced Technology Center",
-      image: "https://images.unsplash.com/photo-1598986646512-9330bcc4c0dc?auto=format&fit=crop&w=800",
-      price: "₹5,000 - ₹12,000",
-      rating: 4.9,
-      description: "Cutting-edge training on the latest technologies with industry expert instructors.",
-      features: ["AI & ML", "Cloud Computing", "Cybersecurity", "IoT Development"],
-      location: "Tech Park"
     },
     {
       name: "Community Computer Education",
@@ -74,8 +90,8 @@ const ComputerTraining = () => {
 
   // Filter centers based on search term and price range
   const filterCenters = (type = "all") => {
-    let minPrice = parseInt(priceRange[0]);
-    let maxPrice = parseInt(priceRange[1]);
+    let minPrice = priceRange[0];
+    let maxPrice = priceRange[1];
     
     return trainingCenters
       .filter(center => {
@@ -102,6 +118,8 @@ const ComputerTraining = () => {
             f.toLowerCase().includes("programming") ||
             f.toLowerCase().includes("ai")
           );
+        } else if (type === "mscit") {
+          return center.features.some(f => f.toLowerCase().includes("ms-cit"));
         }
         return true;
       });
@@ -110,6 +128,8 @@ const ComputerTraining = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      
+      {showAd && <AdPopup onClose={() => setShowAd(false)} />}
       
       <main className="flex-grow">
         <Hero 
@@ -144,7 +164,7 @@ const ComputerTraining = () => {
                     max={12000}
                     step={500}
                     value={priceRange}
-                    onValueChange={setPriceRange}
+                    onValueChange={(value) => setPriceRange([value[0], value[1]])}
                     className="py-4"
                   />
                 </div>
@@ -152,8 +172,9 @@ const ComputerTraining = () => {
             </div>
             
             <Tabs defaultValue="all" className="max-w-5xl mx-auto">
-              <TabsList className="grid grid-cols-3 mb-8">
+              <TabsList className="grid grid-cols-4 mb-8">
                 <TabsTrigger value="all">All Courses</TabsTrigger>
+                <TabsTrigger value="mscit">MS-CIT</TabsTrigger>
                 <TabsTrigger value="basic">Basic Skills</TabsTrigger>
                 <TabsTrigger value="advanced">Advanced Tech</TabsTrigger>
               </TabsList>
@@ -161,6 +182,23 @@ const ComputerTraining = () => {
               <TabsContent value="all">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filterCenters().map((center, index) => (
+                    <ShopCard
+                      key={index}
+                      name={center.name}
+                      image={center.image}
+                      price={center.price}
+                      rating={center.rating}
+                      description={center.description}
+                      features={center.features}
+                      location={center.location}
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="mscit">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filterCenters("mscit").map((center, index) => (
                     <ShopCard
                       key={index}
                       name={center.name}

@@ -12,72 +12,72 @@ import { Search } from "lucide-react";
 import ShopCard from "@/components/ShopCard";
 
 const BarberShops = () => {
-  const [priceRange, setPriceRange] = useState([100, 500]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([100, 500]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const barberShops = [
+  const shops = [
     {
-      name: "Classic Cuts Barber",
+      name: "Royal Cuts",
       image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=800",
       price: "₹150 - ₹400",
-      rating: 4.7,
-      description: "Traditional barber shop offering quality haircuts and beard trims at affordable prices.",
-      features: ["Haircuts", "Beard Trims", "Hot Towel Shaves", "Hair Coloring"],
+      rating: 4.5,
+      description: "Premium barber shop offering haircuts, shaves, and styling with modern techniques.",
+      features: ["Haircuts", "Beard Trim", "Styling", "Hair Coloring"],
+      location: "Main Road"
+    },
+    {
+      name: "Traditional Salon",
+      image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800",
+      price: "₹100 - ₹300",
+      rating: 4.2,
+      description: "Classic barber shop with traditional techniques passed down through generations.",
+      features: ["Classic Cuts", "Hot Towel Shave", "Head Massage", "Affordable"],
       location: "Near Bus Stand"
     },
     {
-      name: "Modern Style Salon",
-      image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800",
+      name: "Style Hub",
+      image: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=800",
       price: "₹200 - ₹500",
-      rating: 4.5,
-      description: "Contemporary salon with modern styling techniques and premium grooming products.",
-      features: ["Premium Haircuts", "Styling", "Facials", "Hair Treatments"],
-      location: "Market Area"
-    },
-    {
-      name: "Royal Grooming",
-      image: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800",
-      price: "₹250 - ₹450",
-      rating: 4.8,
-      description: "Luxury grooming experience with complimentary beverages and relaxed atmosphere.",
-      features: ["VIP Haircuts", "Premium Shaves", "Facial Treatments", "Head Massage"],
+      rating: 4.7,
+      description: "Modern salon with the latest trends and techniques for men's grooming.",
+      features: ["Trending Styles", "Premium Products", "Facial", "Hair Spa"],
       location: "Town Center"
     },
     {
-      name: "Quick Cuts",
-      image: "https://images.unsplash.com/photo-1622296089863-eb7fc530daa8?auto=format&fit=crop&w=800",
-      price: "₹100 - ₹250",
-      rating: 4.3,
-      description: "Fast and efficient haircuts without compromising on quality. Perfect for busy schedules.",
-      features: ["Express Haircuts", "Basic Trims", "Student Discounts"],
-      location: "Near College"
+      name: "Village Barber",
+      image: "https://images.unsplash.com/photo-1512690459411-b9245aed614b?auto=format&fit=crop&w=800",
+      price: "₹80 - ₹200",
+      rating: 4.0,
+      description: "Simple and affordable barber shop serving the local community for decades.",
+      features: ["Basic Cuts", "Quick Service", "Economical", "Experienced"],
+      location: "Village Area"
+    },
+    {
+      name: "Gentleman's Club",
+      image: "https://images.unsplash.com/photo-1596728325488-23270940df01?auto=format&fit=crop&w=800",
+      price: "₹300 - ₹600",
+      rating: 4.9,
+      description: "Luxury barber experience with complimentary beverages and personalized service.",
+      features: ["Premium Service", "Beard Grooming", "Hair Treatment", "VIP Experience"],
+      location: "Tourist Area"
     },
     {
       name: "Family Salon",
-      image: "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=800",
-      price: "₹150 - ₹350",
-      rating: 4.6,
-      description: "Family-friendly salon catering to men, women, and children with personalized service.",
-      features: ["Family Packages", "Kids Haircuts", "Women's Styling", "Men's Grooming"],
+      image: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800",
+      price: "₹100 - ₹350",
+      rating: 4.3,
+      description: "Family-friendly salon serving men, women, and children with care.",
+      features: ["Family Packages", "Kids Cuts", "Women's Services", "Group Discounts"],
       location: "Residential Area"
-    },
-    {
-      name: "Expert Barbers",
-      image: "https://images.unsplash.com/photo-1534297635766-a262cdcb8ee4?auto=format&fit=crop&w=800",
-      price: "₹200 - ₹400",
-      rating: 4.7,
-      description: "Team of experienced barbers specializing in classic and modern hairstyles.",
-      features: ["Specialized Cuts", "Beard Styling", "Hair Products", "Membership Options"],
-      location: "Main Road"
     }
   ];
 
   // Filter shops based on search term and price range
-  const filterShops = (category = "all") => {
-    let minPrice = parseInt(priceRange[0]);
-    let maxPrice = parseInt(priceRange[1]);
+  const filterShops = (type = "all") => {
+    let minPrice = priceRange[0];
+    let maxPrice = priceRange[1];
     
-    return barberShops
+    return shops
       .filter(shop => {
         // Extract numeric price range
         const priceString = shop.price;
@@ -90,8 +90,25 @@ const BarberShops = () => {
       })
       .filter(shop => 
         shop.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        shop.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+        shop.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        shop.features.some(feature => feature.toLowerCase().includes(searchTerm.toLowerCase()))
+      )
+      .filter(shop => {
+        if (type === "premium") {
+          return shop.features.some(f => 
+            f.toLowerCase().includes("premium") || 
+            f.toLowerCase().includes("luxury") ||
+            f.toLowerCase().includes("vip")
+          );
+        } else if (type === "affordable") {
+          return shop.features.some(f => 
+            f.toLowerCase().includes("affordable") || 
+            f.toLowerCase().includes("economical") ||
+            f.toLowerCase().includes("basic")
+          );
+        }
+        return true;
+      });
   };
 
   return (
@@ -101,13 +118,13 @@ const BarberShops = () => {
       <main className="flex-grow">
         <Hero 
           title="Barber Shops in Radhanagari"
-          subtitle="Find the perfect barber for your grooming needs"
-          image="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=2000"
+          subtitle="Find the perfect spot for your grooming needs"
+          image="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=2000"
         />
         
         <InfoSection 
-          title="Find Your Perfect Barber"
-          subtitle="From traditional barbers to modern styling salons"
+          title="Discover Local Barber Shops"
+          subtitle="From traditional cuts to modern styling"
         >
           <div className="mb-8">
             <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md mb-8">
@@ -115,7 +132,7 @@ const BarberShops = () => {
                 <div className="flex-grow relative">
                   <Input
                     type="text"
-                    placeholder="Search barber shops..."
+                    placeholder="Search by name, service or location..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10"
@@ -127,11 +144,11 @@ const BarberShops = () => {
                   <Label className="mb-2 block text-sm">Price Range: ₹{priceRange[0]} - ₹{priceRange[1]}</Label>
                   <Slider
                     defaultValue={[100, 500]}
-                    min={100}
-                    max={500}
-                    step={50}
+                    min={80}
+                    max={600}
+                    step={20}
                     value={priceRange}
-                    onValueChange={setPriceRange}
+                    onValueChange={(value) => setPriceRange([value[0], value[1]])}
                     className="py-4"
                   />
                 </div>
@@ -139,9 +156,10 @@ const BarberShops = () => {
             </div>
             
             <Tabs defaultValue="all" className="max-w-5xl mx-auto">
-              <TabsList className="grid grid-cols-2 mb-8">
+              <TabsList className="grid grid-cols-3 mb-8">
                 <TabsTrigger value="all">All Shops</TabsTrigger>
-                <TabsTrigger value="premium">Premium Shops</TabsTrigger>
+                <TabsTrigger value="premium">Premium</TabsTrigger>
+                <TabsTrigger value="affordable">Affordable</TabsTrigger>
               </TabsList>
 
               <TabsContent value="all">
@@ -163,7 +181,24 @@ const BarberShops = () => {
 
               <TabsContent value="premium">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filterShops().filter(shop => shop.rating >= 4.7).map((shop, index) => (
+                  {filterShops("premium").map((shop, index) => (
+                    <ShopCard
+                      key={index}
+                      name={shop.name}
+                      image={shop.image}
+                      price={shop.price}
+                      rating={shop.rating}
+                      description={shop.description}
+                      features={shop.features}
+                      location={shop.location}
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="affordable">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filterShops("affordable").map((shop, index) => (
                     <ShopCard
                       key={index}
                       name={shop.name}
