@@ -151,19 +151,7 @@ const Index = () => {
           title="Welcome to Radhanagari"
           subtitle="The heart of Maharashtra's biodiversity and home to rare wildlife species"
         >
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-gray-600 mb-6">
-              Whether you're looking for affordable hotels in Radhanagari, planning an exciting jungle safari in Dajipur, 
-              or curious about traditional Kolhapuri food, this site is your go-to resource. Discover Radhanagari wildlife 
-              sanctuary timings, forest stay packages, birdwatching trails, and authentic local experiences.
-            </p>
-            <div className="bg-green-50 p-4 rounded-lg border border-green-200 inline-block">
-              <h3 className="font-semibold text-green-800">April 2025 Update:</h3>
-              <p className="text-sm text-green-700">
-                The summer safari season is now open with extended morning hours. Book your wildlife experience today!
-              </p>
-            </div>
-          </div>
+       
         </InfoSection>
 
         {/* Sanctuary Map Section */}
