@@ -75,7 +75,7 @@ const Index = () => {
         />
 
         {/* Introduction Section */}
-        <InfoSection 
+{/*         <InfoSection 
           title="Welcome to Radhanagari"
           subtitle="The heart of Maharashtra's biodiversity and home to rare wildlife species"
         >
@@ -92,7 +92,7 @@ const Index = () => {
               </p>
             </div>
           </div>
-        </InfoSection>
+        </InfoSection> */}
 
         {/* Natural Spots Section */}
         <InfoSection 
