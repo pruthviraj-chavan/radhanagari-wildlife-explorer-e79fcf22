@@ -154,41 +154,7 @@ const Index = () => {
        
         </InfoSection>
 
-        {/* Sanctuary Map Section */}
-        <InfoSection 
-          title="Radhanagari Wildlife Sanctuary Map"
-          subtitle="Explore the sanctuary's key locations and trails"
-          className="bg-gray-50"
-        >
-          <div className="max-w-5xl mx-auto">
-            <div className="bg-white rounded-xl shadow-md overflow-hidden">
-              <div className="aspect-w-16 aspect-h-9 relative">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122934.45097202437!2d73.92732207388086!3d16.37762192753884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc0bf34922bd09f%3A0xcfbee10e39bc6003!2sRadhanagari%20Wildlife%20Sanctuary!5e0!3m2!1sen!2sus!4v1712611779599!5m2!1sen!2sus" 
-                  className="w-full h-96 rounded-lg" 
-                  style={{ border: 0 }} 
-                  allowFullScreen 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-                <div className="absolute bottom-4 right-4">
-                  <Button variant="outline" className="bg-white" asChild>
-                    <a href="https://goo.gl/maps/ZQZ9XZ9Z9Z9XZ9Z9A" target="_blank" rel="noopener noreferrer">
-                      <MapPin className="mr-2 h-4 w-4" />
-                      View Larger Map
-                    </a>
-                  </Button>
-                </div>
-              </div>
-              <div className="p-6">
-                <p className="text-sm text-gray-600">
-                  Radhanagari Wildlife Sanctuary is located in the Kolhapur district of Maharashtra. 
-                  The sanctuary is spread over an area of 351.16 sq km and is home to diverse flora and fauna.
-                </p>
-              </div>
-            </div>
-          </div>
-        </InfoSection>
+
 
         {/* Natural Spots Section */}
         <InfoSection 
@@ -271,6 +237,42 @@ const Index = () => {
                 description={founder.description}
               />
             ))}
+          </div>
+        </InfoSection>
+
+                {/* Sanctuary Map Section */}
+        <InfoSection 
+          title="Radhanagari Wildlife Sanctuary Map"
+          subtitle="Explore the sanctuary's key locations and trails"
+          className="bg-gray-50"
+        >
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white rounded-xl shadow-md overflow-hidden">
+              <div className="aspect-w-16 aspect-h-9 relative">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122934.45097202437!2d73.92732207388086!3d16.37762192753884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc0bf34922bd09f%3A0xcfbee10e39bc6003!2sRadhanagari%20Wildlife%20Sanctuary!5e0!3m2!1sen!2sus!4v1712611779599!5m2!1sen!2sus" 
+                  className="w-full h-96 rounded-lg" 
+                  style={{ border: 0 }} 
+                  allowFullScreen 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <div className="absolute bottom-4 right-4">
+                  <Button variant="outline" className="bg-white" asChild>
+                    <a href="https://goo.gl/maps/ZQZ9XZ9Z9Z9XZ9Z9A" target="_blank" rel="noopener noreferrer">
+                      <MapPin className="mr-2 h-4 w-4" />
+                      View Larger Map
+                    </a>
+                  </Button>
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="text-sm text-gray-600">
+                  Radhanagari Wildlife Sanctuary is located in the Kolhapur district of Maharashtra. 
+                  The sanctuary is spread over an area of 351.16 sq km and is home to diverse flora and fauna.
+                </p>
+              </div>
+            </div>
           </div>
         </InfoSection>
 
