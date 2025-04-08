@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -24,7 +23,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useIsMobile();
-  
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = [
@@ -46,11 +45,32 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-sm border-b">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+        {/* Logo and company name */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full forest-gradient flex items-center justify-center">
+          {/* Mobile view: Show only the company name */}
+          <span
+            className={cn(
+              "font-semibold text-lg hidden md:block",
+              isMobile && "block"
+            )}
+          >
+            Radhanagari Wildlife Sanctuary
+          </span>
+          {/* Desktop view: Show logo and company name */}
+          <div
+            className={cn(
+              "w-10 h-10 rounded-full forest-gradient flex items-center justify-center hidden md:block",
+              !isMobile && "block"
+            )}
+          >
             <span className="text-white font-bold">RWS</span>
           </div>
-          <span className="font-semibold text-lg hidden md:block">
+          <span
+            className={cn(
+              "font-semibold text-lg hidden md:block",
+              !isMobile && "hidden"
+            )}
+          >
             Radhanagari Wildlife Sanctuary
           </span>
         </Link>
@@ -63,7 +83,7 @@ const Navbar = () => {
           >
             Home
           </Link>
-          
+
           {/* Visit Dropdown */}
           <NavigationMenu>
             <NavigationMenuList>
@@ -90,7 +110,7 @@ const Navbar = () => {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          
+
           {/* Other nav links */}
           {navLinks.slice(1).map((link) => (
             <Link
@@ -125,11 +145,13 @@ const Navbar = () => {
         <div className="flex flex-col h-full">
           {/* Mobile header */}
           <div className="flex justify-between items-center p-4 border-b bg-white">
-            <Link to="/" className="flex items-center gap-2" onClick={toggleMenu}>
-              <div className="w-10 h-10 rounded-full forest-gradient flex items-center justify-center">
-                <span className="text-white font-bold">RWS</span>
-              </div>
-              <span className="font-semibold">Radhanagari</span>
+            {/* Mobile view: Show only the company name */}
+            <Link
+              to="/"
+              className="flex items-center gap-2"
+              onClick={toggleMenu}
+            >
+              <span className="font-semibold text-lg">Radhanagari Wildlife </span>
             </Link>
             <Button variant="ghost" size="icon" onClick={toggleMenu}>
               <X className="h-5 w-5" />
