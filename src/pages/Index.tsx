@@ -146,16 +146,6 @@ const Index = () => {
           image="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000"
         />
 
-        {/* Introduction Section */}
-        <InfoSection 
-          title="Welcome to Radhanagari"
-          subtitle="The heart of Maharashtra's biodiversity and home to rare wildlife species"
-        >
-       
-        </InfoSection>
-
-
-
         {/* Natural Spots Section */}
         <InfoSection 
           title="Must-Visit Natural Spots"
