@@ -4,47 +4,56 @@ import Hero from "@/components/Hero";
 import InfoSection from "@/components/InfoSection";
 import FoodCard from "@/components/FoodCard";
 import Footer from "@/components/Footer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Utensils, Award, Leaf } from "lucide-react";
 
 const FoodGuide = () => {
-  const traditionalDishes = [
+  const fishDishes = [
     {
-      name: "Tambda Rassa",
-      localName: "तांबडा रस्सा",
-      description: "Fiery red mutton curry with Kolhapuri masala, known for its complex flavors and heat from red chilies.",
+      name: "कोल्हापूरी मासे भाजी (Kolhapuri Mase Bhaji)",
+      localName: "कोल्हापूरी मासे भाजी",
+      description: "Spicy fish curry made in traditional Kolhapuri style with aromatic spices and coconut.",
       image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800",
       isVeg: false,
       isSpicy: 3 as 1 | 2 | 3
     },
     {
-      name: "Pandhra Rassa",
-      localName: "पांढरा रस्सा",
-      description: "White coconut-based chicken broth that offers a more subtle flavor compared to its red counterpart.",
+      name: "फणसीचे करी (Phanasiche Curry)",
+      localName: "फणसीचे करी",
+      description: "A delicious jackfruit fish curry with fresh ground spices, popular in the Western Ghats.",
       image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800",
       isVeg: false,
       isSpicy: 2 as 1 | 2 | 3
     },
     {
-      name: "Kolhapuri Chicken Sukka",
-      localName: "कोल्हापूरी चिकन सुक्का",
-      description: "Dry chicken dish with bold spices, coconut, and a perfectly balanced heat level.",
+      name: "पोमफ्रेटचे करी (Pomfret Curry)",
+      localName: "पोमफ्रेटचे करी",
+      description: "Pomfret fish cooked in a flavorful curry with Kolhapuri masala and kokum.",
       image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800",
       isVeg: false,
       isSpicy: 3 as 1 | 2 | 3
     },
     {
-      name: "Doodh Saar",
-      localName: "दूध सार",
-      description: "Comforting spiced milk soup with rice, often enjoyed as a soothing counterpart to spicier dishes.",
+      name: "बोम्बिल चिंचोणी मासे (Bombil Chinchoni)",
+      localName: "बोम्बिल चिंचोणी मासे",
+      description: "Dried Bombay duck fish cooked with tamarind (chinch) in a tangy gravy.",
       image: "https://images.unsplash.com/photo-1612103198005-b238154f4590?auto=format&fit=crop&w=800",
-      isVeg: true,
-      isSpicy: 1 as 1 | 2 | 3
+      isVeg: false,
+      isSpicy: 2 as 1 | 2 | 3
+    },
+    {
+      name: "मासे भाकरी (Mase Bhakri)",
+      localName: "मासे भाकरी",
+      description: "Traditional fish curry served with jowar or bajra bhakri (flatbread).",
+      image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=800",
+      isVeg: false,
+      isSpicy: 3 as 1 | 2 | 3
     }
   ];
 
-  const localSpecialties = [
+  const vegDishes = [
     {
-      name: "Jungle Bhakri",
+      name: "जंगली भाकरी (Jangli Bhakri)",
       localName: "जंगली भाकरी",
       description: "Thick, rustic bread made from local grains, traditionally cooked on an open flame for a smoky flavor.",
       image: "https://images.unsplash.com/photo-1605883705077-8d3d3cebe78c?auto=format&fit=crop&w=800",
@@ -52,7 +61,7 @@ const FoodGuide = () => {
       isSpicy: 1 as 1 | 2 | 3
     },
     {
-      name: "Bamboo Pickle",
+      name: "बांबूचे लोणचे (Bamboo Pickle)",
       localName: "बांबूचे लोणचे",
       description: "Unique pickle made from young bamboo shoots, offering a tangy and slightly spicy flavor profile.",
       image: "https://images.unsplash.com/photo-1589135233689-8775d67b0978?auto=format&fit=crop&w=800",
@@ -60,20 +69,71 @@ const FoodGuide = () => {
       isSpicy: 2 as 1 | 2 | 3
     },
     {
-      name: "Forest Honey",
-      localName: "जंगली मध",
-      description: "Pure, raw honey collected from the sanctuary's forests, with distinct floral notes from native plants.",
-      image: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=800",
+      name: "दुध आमटी (Dudh Amti)",
+      localName: "दुध आमटी",
+      description: "A sweet and savory curry made with milk, jaggery, and a blend of spices, typically served with rice.",
+      image: "https://images.unsplash.com/photo-1612103198005-b238154f4590?auto=format&fit=crop&w=800",
       isVeg: true,
       isSpicy: 1 as 1 | 2 | 3
     },
     {
-      name: "Wild Mushroom Curry",
-      localName: "जंगली मशरूम करी",
-      description: "Seasonal curry made with foraged mushrooms, offering unique earthy flavors from the sanctuary.",
-      image: "https://images.unsplash.com/photo-1582576163090-09d2897fa09a?auto=format&fit=crop&w=800",
+      name: "भातवडे (Bhatwade)",
+      localName: "भातवडे",
+      description: "Steamed rice dumplings filled with grated coconut, jaggery, and cardamom, a traditional Western Ghats specialty.",
+      image: "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?auto=format&fit=crop&w=800",
+      isVeg: true,
+      isSpicy: 1 as 1 | 2 | 3
+    },
+    {
+      name: "थाळपीठ (Thalipeeth)",
+      localName: "थाळपीठ",
+      description: "Multi-grain savory flatbread made with a special flour blend of legumes and grains, a Maharashtrian staple.",
+      image: "https://images.unsplash.com/photo-1619220354441-6dad13f62eb9?auto=format&fit=crop&w=800",
       isVeg: true,
       isSpicy: 2 as 1 | 2 | 3
+    }
+  ];
+
+  const nonVegDishes = [
+    {
+      name: "कोल्हापूरी चिकन (Kolhapuri Chicken)",
+      localName: "कोल्हापूरी चिकन",
+      description: "Fiery chicken curry prepared with the famous Kolhapuri masala known for its complex flavor and heat.",
+      image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800",
+      isVeg: false,
+      isSpicy: 3 as 1 | 2 | 3
+    },
+    {
+      name: "गवरण चिकन (Gavran Chicken)",
+      localName: "गवरण चिकन",
+      description: "Country chicken cooked in traditional village style with authentic spices and minimal oil.",
+      image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800",
+      isVeg: false,
+      isSpicy: 3 as 1 | 2 | 3
+    },
+    {
+      name: "तांबडा रस्सा (Tambda Rassa)",
+      localName: "तांबडा रस्सा",
+      description: "Fiery red mutton curry with Kolhapuri masala, known for its complex flavors and heat from red chilies.",
+      image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800",
+      isVeg: false,
+      isSpicy: 3 as 1 | 2 | 3
+    },
+    {
+      name: "पांढरा रस्सा (Pandhra Rassa)",
+      localName: "पांढरा रस्सा",
+      description: "White coconut-based chicken broth that offers a more subtle flavor compared to its red counterpart.",
+      image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800",
+      isVeg: false,
+      isSpicy: 2 as 1 | 2 | 3
+    },
+    {
+      name: "कोल्हापूरी मटण सुक्का (Kolhapuri Mutton Sukka)",
+      localName: "कोल्हापूरी मटण सुक्का",
+      description: "Dry mutton dish with bold spices, coconut, and a perfectly balanced heat level.",
+      image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800",
+      isVeg: false,
+      isSpicy: 3 as 1 | 2 | 3
     }
   ];
 
@@ -82,6 +142,12 @@ const FoodGuide = () => {
       <Navbar />
       
       <main className="flex-grow">
+        {/* Hidden SEO content */}
+        <div className="hidden">
+          <h1>Radhanagari Food Guide | Traditional Kolhapuri Cuisine | Maharashtra Food</h1>
+          <p>Explore authentic Kolhapuri cuisine and traditional forest recipes in Radhanagari. Discover local food specialties, vegetarian and non-vegetarian dishes, and where to eat near the wildlife sanctuary.</p>
+        </div>
+      
         <Hero 
           title="Radhanagari Food Guide"
           subtitle="Explore authentic Kolhapuri cuisine and traditional forest recipes"
@@ -133,45 +199,67 @@ const FoodGuide = () => {
           </div>
         </InfoSection>
         
+        {/* Food Categories Section with Tabs */}
         <InfoSection 
-          title="Traditional Kolhapuri Dishes"
-          subtitle="Bold flavors and spices that define the region's cuisine"
+          title="Traditional Dishes"
+          subtitle="Authentic tastes from the Radhanagari region"
           className="bg-gray-50"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {traditionalDishes.map((dish, index) => (
-              <FoodCard 
-                key={index}
-                name={dish.name}
-                localName={dish.localName}
-                description={dish.description}
-                image={dish.image}
-                isVeg={dish.isVeg}
-                isSpicy={dish.isSpicy}
-              />
-            ))}
-          </div>
-        </InfoSection>
-        
-        <InfoSection 
-          title="Radhanagari Local Specialties"
-          subtitle="Unique dishes with ingredients sourced from the sanctuary"
-          gradient="forest-gradient"
-          textColor="text-white"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {localSpecialties.map((dish, index) => (
-              <FoodCard 
-                key={index}
-                name={dish.name}
-                localName={dish.localName}
-                description={dish.description}
-                image={dish.image}
-                isVeg={dish.isVeg}
-                isSpicy={dish.isSpicy}
-              />
-            ))}
-          </div>
+          <Tabs defaultValue="non-veg" className="max-w-5xl mx-auto">
+            <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsTrigger value="non-veg">Non-Vegetarian</TabsTrigger>
+              <TabsTrigger value="fish">Fish Dishes</TabsTrigger>
+              <TabsTrigger value="veg">Vegetarian</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="non-veg">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                {nonVegDishes.map((dish, index) => (
+                  <FoodCard 
+                    key={index}
+                    name={dish.name}
+                    localName={dish.localName}
+                    description={dish.description}
+                    image={dish.image}
+                    isVeg={dish.isVeg}
+                    isSpicy={dish.isSpicy}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="fish">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                {fishDishes.map((dish, index) => (
+                  <FoodCard 
+                    key={index}
+                    name={dish.name}
+                    localName={dish.localName}
+                    description={dish.description}
+                    image={dish.image}
+                    isVeg={dish.isVeg}
+                    isSpicy={dish.isSpicy}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="veg">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                {vegDishes.map((dish, index) => (
+                  <FoodCard 
+                    key={index}
+                    name={dish.name}
+                    localName={dish.localName}
+                    description={dish.description}
+                    image={dish.image}
+                    isVeg={dish.isVeg}
+                    isSpicy={dish.isSpicy}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </InfoSection>
         
         <InfoSection 

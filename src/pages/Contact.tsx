@@ -64,6 +64,12 @@ const Contact = () => {
       <Navbar />
       
       <main className="flex-grow">
+        {/* SEO meta data - added for search engines */}
+        <div className="hidden">
+          <h1>Contact Radhanagari Wildlife Sanctuary | Phone, Email, Address</h1>
+          <p>Get in touch with Radhanagari Wildlife Sanctuary. Find contact information, address, opening hours, and inquiry form to plan your visit.</p>
+        </div>
+        
         <InfoSection
           title="Contact Us"
           subtitle="Get in touch with Radhanagari Wildlife Sanctuary"
@@ -139,7 +145,7 @@ const Contact = () => {
                 </form>
               </div>
               
-              {/* Contact Information */}
+              {/* Contact Information - Updated with new details */}
               <div>
                 <div className="bg-white p-6 rounded-lg shadow-md mb-6">
                   <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
@@ -149,7 +155,8 @@ const Contact = () => {
                       <div>
                         <h4 className="font-medium">Address</h4>
                         <p className="text-gray-600">
-                          Radhanagari Wildlife Sanctuary,<br />
+                          Incite Computer,<br />
+                          Radhanagari Near Post Office,<br />
                           Kolhapur District, Maharashtra,<br />
                           India - 416212
                         </p>
@@ -160,8 +167,9 @@ const Contact = () => {
                       <Phone className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" />
                       <div>
                         <h4 className="font-medium">Phone</h4>
-                        <p className="text-gray-600">+91 98765 43210</p>
-                        <p className="text-gray-600">+91 23456 78910 (Forest Office)</p>
+                        <p className="text-gray-600">+91 94232 81767</p>
+                        <p className="text-gray-600">+91 82630 31055</p>
+                        <p className="text-gray-600">+91 94048 95667</p>
                       </div>
                     </div>
                     
@@ -169,8 +177,7 @@ const Contact = () => {
                       <Mail className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" />
                       <div>
                         <h4 className="font-medium">Email</h4>
-                        <p className="text-gray-600">info@radhanagari-wildlife.org</p>
-                        <p className="text-gray-600">bookings@radhanagari-wildlife.org</p>
+                        <p className="text-gray-600">incitecomputer@gmail.com</p>
                       </div>
                     </div>
                     

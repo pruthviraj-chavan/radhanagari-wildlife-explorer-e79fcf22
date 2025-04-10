@@ -5,15 +5,12 @@ import InfoSection from "@/components/InfoSection";
 import Footer from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
-import { Label } from "@/components/ui/label";
 import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
-import ShopCard from "@/components/ShopCard";
+import { Search, Computer, MapPin, Clock, Bookmark } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import { AdPopup } from "@/components/AdPopup";
 
 const ComputerTraining = () => {
-  const [priceRange, setPriceRange] = useState<[number, number]>([1000, 10000]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showAd, setShowAd] = useState(false);
 
@@ -24,86 +21,89 @@ const ComputerTraining = () => {
 
   const trainingCenters = [
     {
+      name: "Disha Computer Education",
+      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800",
+      rating: 4.8,
+      reviews: 12,
+      description: "Computer training school offering comprehensive courses with expert instructors.",
+      features: ["MS-CIT", "Tally Prime", "Programming", "MS Office"],
+      location: "Kolhapur-Radhanagari Rd, Haldi",
+      hours: "Open ⋅ Closes 8 pm",
+      phone: "0231 241 7071",
+      category: "mscit"
+    },
+    {
+      name: "Incite Computer",
+      image: "https://images.unsplash.com/photo-1594729095022-e2f6d2eece9c?auto=format&fit=crop&w=800",
+      rating: 5.0,
+      reviews: 6,
+      description: "Corporate office offering professional computer training and IT services.",
+      features: ["MS-CIT", "Advanced Programming", "Web Development", "Digital Marketing"],
+      location: "Main Rd, Radhanagari",
+      hours: "Open ⋅ Closes 8 pm",
+      phone: "094232 81767",
+      category: "advanced"
+    },
+    {
       name: "Insight Computers Radhanagari",
       image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800",
-      price: "₹2,500 - ₹8,000",
       rating: 4.8,
+      reviews: 8,
       description: "Official MS-CIT center offering comprehensive computer training courses with job placement assistance.",
       features: ["MS-CIT", "Tally Prime", "Programming", "MS Office"],
-      location: "Near Bus Stand, Radhanagari"
+      location: "Near Bus Stand, Radhanagari",
+      hours: "Open ⋅ Closes 8 pm",
+      category: "mscit"
     },
     {
       name: "Digital Skills Academy",
       image: "https://images.unsplash.com/photo-1594729095022-e2f6d2eece9c?auto=format&fit=crop&w=800",
-      price: "₹3,000 - ₹9,500",
       rating: 4.6,
+      reviews: 10,
       description: "Industry-focused training with practical projects and internship opportunities.",
       features: ["Web Development", "Digital Marketing", "Data Analysis", "Certificate Courses"],
-      location: "Main Road, Radhanagari"
+      location: "Main Road, Radhanagari",
+      hours: "Open ⋅ Closes 9 pm",
+      category: "advanced"
     },
     {
       name: "Tech Career Institute",
       image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800",
-      price: "₹1,500 - ₹4,000",
       rating: 4.5,
+      reviews: 7,
       description: "Affordable computer education tailored for rural students with flexible timings.",
       features: ["Basic Computing", "Tally", "DTP", "MS-CIT"],
-      location: "Village Center"
+      location: "Village Center",
+      hours: "Open ⋅ Closes 7 pm",
+      category: "basic"
     },
     {
       name: "MKCL Advanced Center",
       image: "https://images.unsplash.com/photo-1598986646512-9330bcc4c0dc?auto=format&fit=crop&w=800",
-      price: "₹5,000 - ₹12,000",
       rating: 4.9,
+      reviews: 15,
       description: "Official MKCL center offering MS-CIT and advanced courses with expert instructors.",
       features: ["MS-CIT", "Advanced Excel", "Advanced Tally", "Programming"],
-      location: "Near Post Office, Radhanagari"
+      location: "Near Post Office, Radhanagari",
+      hours: "Open ⋅ Closes 8:30 pm",
+      category: "mscit"
     },
     {
       name: "Rural IT Solutions",
       image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800",
-      price: "₹1,500 - ₹4,000",
       rating: 4.5,
+      reviews: 5,
       description: "Affordable computer education tailored for rural students with flexible timings.",
       features: ["Basic Computing", "Tally", "DTP", "Language Support"],
-      location: "Village Center"
-    },
-    {
-      name: "Community Computer Education",
-      image: "https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&w=800",
-      price: "₹1,000 - ₹3,000",
-      rating: 4.4,
-      description: "Community-based computer literacy programs accessible to all age groups.",
-      features: ["Senior Citizen Programs", "School Student Batches", "Basic Skills", "Affordable Courses"],
-      location: "Community Center"
-    },
-    {
-      name: "Future Skills Hub",
-      image: "https://images.unsplash.com/photo-1573166953822-0d37dde20b9d?auto=format&fit=crop&w=800",
-      price: "₹2,800 - ₹7,500",
-      rating: 4.7,
-      description: "Modern training facility focusing on future-ready digital skills and certifications.",
-      features: ["Certified Courses", "Placement Support", "Advanced Training", "Weekend Batches"],
-      location: "Town Center"
+      location: "Village Center",
+      hours: "Open ⋅ Closes 7 pm",
+      category: "basic"
     }
   ];
 
-  // Filter centers based on search term and price range
+  // Filter centers based on search term
   const filterCenters = (type = "all") => {
-    let minPrice = priceRange[0];
-    let maxPrice = priceRange[1];
-    
     return trainingCenters
-      .filter(center => {
-        // Extract numeric price range
-        const priceString = center.price;
-        const prices = priceString.match(/\d+/g);
-        if (prices && prices.length >= 2) {
-          const avgPrice = (parseInt(prices[0]) + parseInt(prices[1])) / 2;
-          return avgPrice >= minPrice && avgPrice <= maxPrice;
-        }
-        return true;
-      })
       .filter(center => 
         center.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
         center.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -111,15 +111,11 @@ const ComputerTraining = () => {
       )
       .filter(center => {
         if (type === "basic") {
-          return center.features.some(f => f.toLowerCase().includes("basic"));
+          return center.category === "basic";
         } else if (type === "advanced") {
-          return center.features.some(f => 
-            f.toLowerCase().includes("advanced") || 
-            f.toLowerCase().includes("programming") ||
-            f.toLowerCase().includes("ai")
-          );
+          return center.category === "advanced";
         } else if (type === "mscit") {
-          return center.features.some(f => f.toLowerCase().includes("ms-cit"));
+          return center.category === "mscit";
         }
         return true;
       });
@@ -132,6 +128,12 @@ const ComputerTraining = () => {
       {showAd && <AdPopup onClose={() => setShowAd(false)} />}
       
       <main className="flex-grow">
+        {/* SEO metadata */}
+        <div className="hidden">
+          <h1>Computer Training Centers in Radhanagari | MS-CIT, Tally, Programming Courses</h1>
+          <p>Find the best computer training institutes in Radhanagari. Learn MS-CIT, Tally, programming, digital marketing and more. Affordable courses with expert instructors.</p>
+        </div>
+      
         <Hero 
           title="Computer Training Centers in Radhanagari"
           subtitle="Learn digital skills and advance your career opportunities"
@@ -144,30 +146,15 @@ const ComputerTraining = () => {
         >
           <div className="mb-8">
             <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md mb-8">
-              <div className="flex flex-col md:flex-row gap-4 mb-6">
-                <div className="flex-grow relative">
-                  <Input
-                    type="text"
-                    placeholder="Search by course, skill or center name..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                </div>
-                
-                <div className="w-full md:w-60">
-                  <Label className="mb-2 block text-sm">Price Range: ₹{priceRange[0]} - ₹{priceRange[1]}</Label>
-                  <Slider
-                    defaultValue={[1000, 10000]}
-                    min={1000}
-                    max={12000}
-                    step={500}
-                    value={priceRange}
-                    onValueChange={(value) => setPriceRange([value[0], value[1]])}
-                    className="py-4"
-                  />
-                </div>
+              <div className="relative">
+                <Input
+                  type="text"
+                  placeholder="Search by course, skill or center name..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               </div>
             </div>
             
@@ -182,16 +169,37 @@ const ComputerTraining = () => {
               <TabsContent value="all">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filterCenters().map((center, index) => (
-                    <ShopCard
-                      key={index}
-                      name={center.name}
-                      image={center.image}
-                      price={center.price}
-                      rating={center.rating}
-                      description={center.description}
-                      features={center.features}
-                      location={center.location}
-                    />
+                    <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="relative h-48">
+                        <img 
+                          src={center.image} 
+                          alt={center.name} 
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                          <span className="text-amber-500 mr-1">★</span>
+                          {center.rating} ({center.reviews})
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold">{center.name}</h3>
+                        <p className="text-sm text-gray-700 mb-4">{center.description}</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center text-sm">
+                            <Clock className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.hours}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <MapPin className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.location}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <Computer className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.features.join(", ")}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
                   ))}
                 </div>
               </TabsContent>
@@ -199,16 +207,37 @@ const ComputerTraining = () => {
               <TabsContent value="mscit">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filterCenters("mscit").map((center, index) => (
-                    <ShopCard
-                      key={index}
-                      name={center.name}
-                      image={center.image}
-                      price={center.price}
-                      rating={center.rating}
-                      description={center.description}
-                      features={center.features}
-                      location={center.location}
-                    />
+                    <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="relative h-48">
+                        <img 
+                          src={center.image} 
+                          alt={center.name} 
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                          <span className="text-amber-500 mr-1">★</span>
+                          {center.rating} ({center.reviews})
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold">{center.name}</h3>
+                        <p className="text-sm text-gray-700 mb-4">{center.description}</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center text-sm">
+                            <Clock className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.hours}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <MapPin className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.location}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <Computer className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.features.join(", ")}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
                   ))}
                 </div>
               </TabsContent>
@@ -216,16 +245,37 @@ const ComputerTraining = () => {
               <TabsContent value="basic">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filterCenters("basic").map((center, index) => (
-                    <ShopCard
-                      key={index}
-                      name={center.name}
-                      image={center.image}
-                      price={center.price}
-                      rating={center.rating}
-                      description={center.description}
-                      features={center.features}
-                      location={center.location}
-                    />
+                    <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="relative h-48">
+                        <img 
+                          src={center.image} 
+                          alt={center.name} 
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                          <span className="text-amber-500 mr-1">★</span>
+                          {center.rating} ({center.reviews})
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold">{center.name}</h3>
+                        <p className="text-sm text-gray-700 mb-4">{center.description}</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center text-sm">
+                            <Clock className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.hours}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <MapPin className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.location}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <Computer className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.features.join(", ")}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
                   ))}
                 </div>
               </TabsContent>
@@ -233,20 +283,94 @@ const ComputerTraining = () => {
               <TabsContent value="advanced">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filterCenters("advanced").map((center, index) => (
-                    <ShopCard
-                      key={index}
-                      name={center.name}
-                      image={center.image}
-                      price={center.price}
-                      rating={center.rating}
-                      description={center.description}
-                      features={center.features}
-                      location={center.location}
-                    />
+                    <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="relative h-48">
+                        <img 
+                          src={center.image} 
+                          alt={center.name} 
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                          <span className="text-amber-500 mr-1">★</span>
+                          {center.rating} ({center.reviews})
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold">{center.name}</h3>
+                        <p className="text-sm text-gray-700 mb-4">{center.description}</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center text-sm">
+                            <Clock className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.hours}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <MapPin className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.location}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <Computer className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{center.features.join(", ")}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
                   ))}
                 </div>
               </TabsContent>
             </Tabs>
+          </div>
+        </InfoSection>
+
+        {/* Popular Courses Section */}
+        <InfoSection 
+          title="Popular Courses"
+          subtitle="Enhance your skills with these in-demand computer courses"
+          className="bg-gray-50"
+        >
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                  <Bookmark className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">MS-CIT Certification</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  The Maharashtra State Certificate in Information Technology (MS-CIT) is a popular computer literacy course designed by MKCL.
+                </p>
+                <div className="text-sm text-gray-700">
+                  <p className="mb-1"><span className="font-medium">Duration:</span> 3 months</p>
+                  <p><span className="font-medium">Includes:</span> MS Office, Internet, Email, Digital Literacy</p>
+                </div>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                  <Bookmark className="h-6 w-6 text-green-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Tally Prime</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Essential accounting software training that helps students and professionals manage business finances efficiently.
+                </p>
+                <div className="text-sm text-gray-700">
+                  <p className="mb-1"><span className="font-medium">Duration:</span> 2 months</p>
+                  <p><span className="font-medium">Includes:</span> GST, Accounting, Inventory Management</p>
+                </div>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                  <Bookmark className="h-6 w-6 text-purple-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Web Development</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Learn to create modern websites and web applications with HTML, CSS, JavaScript and more.
+                </p>
+                <div className="text-sm text-gray-700">
+                  <p className="mb-1"><span className="font-medium">Duration:</span> 4 months</p>
+                  <p><span className="font-medium">Includes:</span> HTML, CSS, JavaScript, React</p>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoSection>
       </main>

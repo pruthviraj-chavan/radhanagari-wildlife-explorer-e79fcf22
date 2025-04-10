@@ -30,6 +30,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "Food", href: "/food-guide" },
     { name: "Wildlife", href: "/wildlife-safari" },
+    { name: "Waterfalls", href: "/waterfalls" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
@@ -38,7 +39,6 @@ const Navbar = () => {
     { name: "Hotels & Homestays", href: "/hotels-homestays" },
     { name: "Barber Shops", href: "/barber-shops" },
     { name: "Computer Training", href: "/computer-training" },
-    { name: "Lodges", href: "/lodges" },
     { name: "Supermarkets", href: "/supermarkets" },
   ];
 
@@ -69,7 +69,7 @@ const Navbar = () => {
             Home
           </Link>
 
-          {/* Visit Dropdown */}
+          {/* Visit Dropdown - Fixed overflow issue */}
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -77,7 +77,7 @@ const Navbar = () => {
                   Visit
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
+                  <ul className="grid w-[400px] gap-3 p-4 max-h-[80vh] overflow-y-auto">
                     {visitLinks.map((link) => (
                       <li key={link.href}>
                         <NavigationMenuLink asChild>
@@ -122,64 +122,61 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile navigation menu */}
-      <div
-        className={cn(
-          "fixed inset-0 z-50 md:hidden transform transition-transform duration-300 ease-in-out bg-white",
-          isOpen ? "translate-x-0" : "translate-x-full"
-        )}
-      >
-        <div className="flex flex-col h-full">
-          {/* Mobile header */}
-          <div className="flex justify-between items-center p-4 border-b bg-white">
-            {/* Mobile view: Show only the company name */}
-            <Link
-              to="/"
-              className="flex items-center gap-2"
-              onClick={toggleMenu}
-            >
-              <span className="font-semibold text-lg">Radhanagari Wildlife Sanctuary</span>
-            </Link>
-            <Button variant="ghost" size="icon" onClick={toggleMenu}>
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
+      {/* Mobile navigation menu - Fixed mobile menu styling */}
+      {isOpen && (
+        <div className="fixed inset-0 z-50 md:hidden bg-white transform transition-transform duration-300 ease-in-out">
+          <div className="flex flex-col h-full">
+            {/* Mobile header */}
+            <div className="flex justify-between items-center p-4 border-b bg-white">
+              {/* Mobile view: Show only the company name */}
+              <Link
+                to="/"
+                className="flex items-center gap-2"
+                onClick={toggleMenu}
+              >
+                <span className="font-semibold text-lg">Radhanagari Wildlife Sanctuary</span>
+              </Link>
+              <Button variant="ghost" size="icon" onClick={toggleMenu}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
 
-          {/* Mobile menu items */}
-          <div className="flex-1 overflow-y-auto">
-            <div className="p-4">
-              {/* Regular links */}
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className="block py-3 text-lg border-b border-gray-100"
-                  onClick={toggleMenu}
-                >
-                  {link.name}
-                </Link>
-              ))}
+            {/* Mobile menu items */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="p-4">
+                {/* Regular links */}
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="block py-3 text-lg border-b border-gray-100"
+                    onClick={toggleMenu}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
 
-              {/* Visit section with nested links */}
-              <div className="py-3 border-b border-gray-100">
-                <div className="text-lg font-medium mb-2">Visit</div>
-                <div className="pl-4 space-y-2">
-                  {visitLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      to={link.href}
-                      className="block py-2 text-gray-700"
-                      onClick={toggleMenu}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
+                {/* Visit section with nested links */}
+                <div className="py-3 border-b border-gray-100">
+                  <div className="text-lg font-medium mb-2">Visit</div>
+                  <div className="pl-4 space-y-2">
+                    {visitLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        to={link.href}
+                        className="block py-2 text-gray-700"
+                        onClick={toggleMenu}
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };

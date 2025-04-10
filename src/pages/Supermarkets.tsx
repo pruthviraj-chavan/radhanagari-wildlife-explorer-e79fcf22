@@ -5,114 +5,93 @@ import InfoSection from "@/components/InfoSection";
 import Footer from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { Search, MapPin, Clock } from "lucide-react";
-import ShopCard from "@/components/ShopCard";
+import { Search, Store, MapPin, Clock, ShoppingBag } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const Supermarkets = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedArea, setSelectedArea] = useState("all");
 
-  const supermarkets = [
+  const stores = [
     {
-      name: "Radhanagari Super Bazaar",
-      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800",
-      price: "₹₹",
-      rating: 4.5,
-      description: "Large supermarket with a wide range of groceries, household items, and local products.",
-      features: ["Groceries", "Fresh Produce", "Dairy Products", "Home Essentials"],
-      location: "Town Center",
-      area: "central",
-      hours: "8 AM - 9 PM"
-    },
-    {
-      name: "Village Mart",
-      image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800",
-      price: "₹",
-      rating: 4.3,
-      description: "Community grocery store offering essential items at affordable prices.",
-      features: ["Basic Groceries", "Local Produce", "Affordable Prices"],
-      location: "Near Bus Stand",
-      area: "central",
-      hours: "7 AM - 8 PM"
-    },
-    {
-      name: "Fresh & Save Supermarket",
-      image: "https://images.unsplash.com/photo-1601598851547-4302969d0614?auto=format&fit=crop&w=800",
-      price: "₹₹",
-      rating: 4.7,
-      description: "Modern supermarket focusing on fresh produce, organic items, and quality products.",
-      features: ["Organic Section", "Fresh Produce", "Imported Goods", "Home Delivery"],
-      location: "Market Road",
-      area: "east",
-      hours: "8 AM - 10 PM"
-    },
-    {
-      name: "Wildlife Area Convenience Store",
-      image: "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?auto=format&fit=crop&w=800",
-      price: "₹₹",
+      name: "New Super Bazar",
+      image: "https://images.unsplash.com/photo-1580913428735-bd3c269d6a82?auto=format&fit=crop&w=800",
       rating: 4.2,
-      description: "Convenient store near the wildlife sanctuary entrance catering to tourists and travelers.",
-      features: ["Ready-to-eat Food", "Travel Essentials", "Souvenirs", "Camping Supplies"],
-      location: "Near Sanctuary Entrance",
-      area: "north",
-      hours: "6 AM - 9 PM"
+      reviews: 14,
+      description: "Grocery store with a variety of daily essentials and household items.",
+      features: ["Grocery", "In-store pick-up", "Delivery"],
+      location: "Radhanagari town center",
+      hours: "Open ⋅ Closes 9 pm",
+      phone: "092733 05309",
+      category: "supermarket"
     },
     {
-      name: "Budget Bazaar",
-      image: "https://images.unsplash.com/photo-1580913428023-02c695666d61?auto=format&fit=crop&w=800",
-      price: "₹",
-      rating: 4.1,
-      description: "Discount store offering groceries and household items at competitive prices.",
-      features: ["Bulk Buying Options", "Discounted Items", "Basic Essentials"],
-      location: "South Colony",
-      area: "south",
-      hours: "9 AM - 8 PM"
+      name: "AARUSH BAJET BAZAR",
+      image: "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?auto=format&fit=crop&w=800",
+      rating: 5.0,
+      reviews: 1,
+      description: "Supermarket with quality materials available at budget prices.",
+      features: ["Supermarket", "Budget-friendly"],
+      location: "Shop No 1, Radhanagari, Main, Road Main Chowk",
+      hours: "Open ⋅ Closes 9 pm",
+      phone: "098507 83169",
+      category: "supermarket"
     },
     {
-      name: "Premium Grocery World",
-      image: "https://images.unsplash.com/photo-1604719312566-8912e9667d9f?auto=format&fit=crop&w=800",
-      price: "₹₹₹",
-      rating: 4.8,
-      description: "Upscale supermarket with premium products, imported goods, and specialty items.",
-      features: ["Gourmet Products", "Imported Foods", "Premium Brands", "Specialty Items"],
-      location: "New Development Area",
-      area: "west",
-      hours: "10 AM - 9 PM"
+      name: "Nitin General Stores",
+      image: "https://images.unsplash.com/photo-1601598851547-4302969d0614?auto=format&fit=crop&w=800",
+      rating: 4.3,
+      reviews: 6,
+      description: "General store offering best service and daily essentials.",
+      features: ["General store", "Best service"],
+      location: "Radhanagari, Road",
+      hours: "Open ⋅ Closes 9 pm",
+      phone: "094232 86665",
+      category: "general"
     },
     {
-      name: "Farmers' Direct Market",
-      image: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=800",
-      price: "₹₹",
-      rating: 4.6,
-      description: "Market selling directly from local farmers with fresh produce and artisanal products.",
-      features: ["Farm Fresh Produce", "Local Products", "Artisanal Foods", "Seasonal Items"],
-      location: "East Road",
-      area: "east",
-      hours: "6 AM - 2 PM"
+      name: "NOUMAN SUPER BAZAR",
+      image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800",
+      rating: 3.5,
+      reviews: 0,
+      description: "Supermarket located near Grampanchayat Market with delivery options.",
+      features: ["Supermarket", "Delivery"],
+      location: "Chowk, near Grampanchayat Market",
+      hours: "Open ⋅ Closes 9 pm",
+      phone: "096570 21133",
+      category: "supermarket"
     },
     {
-      name: "24/7 Express Mart",
-      image: "https://images.unsplash.com/photo-1515706886582-54c73c5eaf41?auto=format&fit=crop&w=800",
-      price: "₹₹",
-      rating: 4.0,
-      description: "Round-the-clock convenience store for emergency and late-night shopping needs.",
-      features: ["24/7 Service", "Quick Shopping", "Essential Items", "Ready-to-eat Food"],
-      location: "Highway Junction",
-      area: "west",
-      hours: "Open 24 Hours"
+      name: "KALYANI TRENDING COMPANY",
+      image: "https://images.unsplash.com/photo-1601599963565-b7f49d528ec9?auto=format&fit=crop&w=800",
+      rating: 3.5,
+      reviews: 0,
+      description: "Supermarket with in-store shopping experience, opposite Bank Of India.",
+      features: ["Supermarket", "In-store shopping"],
+      location: "Opp, Radhanagari Rd, near by Bank Of India",
+      hours: "Open ⋅ Closes 5 pm",
+      phone: "094238 26147",
+      category: "supermarket"
     }
   ];
 
-  const filterSupermarkets = () => {
-    return supermarkets
+  // Filter stores based on search term and category
+  const filterStores = (category = "all") => {
+    return stores
       .filter(store => 
         store.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
         store.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         store.features.some(feature => feature.toLowerCase().includes(searchTerm.toLowerCase()))
       )
-      .filter(store => selectedArea === "all" || store.area === selectedArea);
+      .filter(store => {
+        if (category === "supermarket") {
+          return store.category === "supermarket";
+        } else if (category === "general") {
+          return store.category === "general";
+        }
+        return true;
+      });
   };
 
   return (
@@ -120,252 +99,224 @@ const Supermarkets = () => {
       <Navbar />
       
       <main className="flex-grow">
+        {/* SEO metadata */}
+        <div className="hidden">
+          <h1>Supermarkets and Grocery Stores in Radhanagari | Local Shopping</h1>
+          <p>Find the best supermarkets, grocery stores, and general stores in Radhanagari. Essential shopping locations with delivery options and daily household items.</p>
+        </div>
+      
         <Hero 
           title="Supermarkets in Radhanagari"
-          subtitle="Find the best grocery stores and supermarkets for your shopping needs"
-          image="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=2000"
+          subtitle="Find all your daily needs and essentials"
+          image="https://images.unsplash.com/photo-1580913428735-bd3c269d6a82?auto=format&fit=crop&w=2000"
         />
         
         <InfoSection 
-          title="Find Your Local Supermarket"
-          subtitle="From convenience stores to premium grocery outlets"
+          title="Local Stores & Supermarkets"
+          subtitle="Discover convenient shopping options in Radhanagari"
         >
           <div className="mb-8">
             <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md mb-8">
-              <div className="flex flex-col md:flex-row gap-4 mb-6">
-                <div className="flex-grow relative">
-                  <Input
-                    type="text"
-                    placeholder="Search supermarkets or products..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                </div>
-                
-                <div className="w-full md:w-60">
-                  <Label className="mb-2 block text-sm">Select Area</Label>
-                  <select 
-                    className="w-full border border-gray-300 rounded-md h-10 px-3"
-                    value={selectedArea}
-                    onChange={(e) => setSelectedArea(e.target.value)}
-                  >
-                    <option value="all">All Areas</option>
-                    <option value="central">Central</option>
-                    <option value="north">North</option>
-                    <option value="south">South</option>
-                    <option value="east">East</option>
-                    <option value="west">West</option>
-                  </select>
-                </div>
+              <div className="relative">
+                <Input
+                  type="text"
+                  placeholder="Search by store name or products..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               </div>
             </div>
             
             <Tabs defaultValue="all" className="max-w-5xl mx-auto">
-              <TabsList className="grid grid-cols-4 mb-8">
+              <TabsList className="grid grid-cols-3 mb-8">
                 <TabsTrigger value="all">All Stores</TabsTrigger>
-                <TabsTrigger value="budget">Budget</TabsTrigger>
-                <TabsTrigger value="premium">Premium</TabsTrigger>
-                <TabsTrigger value="24hours">24 Hours</TabsTrigger>
+                <TabsTrigger value="supermarket">Supermarkets</TabsTrigger>
+                <TabsTrigger value="general">General Stores</TabsTrigger>
               </TabsList>
 
               <TabsContent value="all">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filterSupermarkets().map((store, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
-                      <img 
-                        src={store.image} 
-                        alt={store.name} 
-                        className="w-full h-48 object-cover"
-                      />
-                      <div className="p-4">
-                        <div className="flex justify-between items-start">
-                          <h3 className="text-lg font-semibold">{store.name}</h3>
-                          <div className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">
-                            {store.rating} ★
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center mt-1 text-sm text-gray-600">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          <span>{store.location}</span>
-                        </div>
-                        
-                        <div className="flex items-center mt-1 text-sm text-gray-600">
-                          <Clock className="w-4 h-4 mr-1" />
-                          <span>{store.hours}</span>
-                        </div>
-                        
-                        <p className="mt-2 text-sm text-gray-600">{store.description}</p>
-                        
-                        <div className="mt-3 flex flex-wrap gap-1">
-                          {store.features.map((feature, idx) => (
-                            <span 
-                              key={idx} 
-                              className="inline-block bg-gray-100 rounded-full px-2 py-1 text-xs font-medium text-gray-700"
-                            >
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                        
-                        <div className="mt-4 text-sm font-medium">
-                          Price Range: <span className="text-green-700">{store.price}</span>
+                  {filterStores().map((store, index) => (
+                    <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="relative h-48">
+                        <img 
+                          src={store.image} 
+                          alt={store.name} 
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                          <span className="text-amber-500 mr-1">★</span>
+                          {store.rating} ({store.reviews})
                         </div>
                       </div>
-                    </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold">{store.name}</h3>
+                        <p className="text-sm text-gray-700 mb-4">{store.description}</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center text-sm">
+                            <Clock className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{store.hours}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <MapPin className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{store.location}</span>
+                          </div>
+                          <div className="flex flex-wrap gap-2 mt-3">
+                            {store.features.map((feature, i) => (
+                              <Badge key={i} variant="outline" className="bg-gray-100">
+                                {feature}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
                   ))}
                 </div>
               </TabsContent>
 
-              <TabsContent value="budget">
+              <TabsContent value="supermarket">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filterSupermarkets().filter(store => store.price === "₹").map((store, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
-                      <img 
-                        src={store.image} 
-                        alt={store.name} 
-                        className="w-full h-48 object-cover"
-                      />
-                      <div className="p-4">
-                        <div className="flex justify-between items-start">
-                          <h3 className="text-lg font-semibold">{store.name}</h3>
-                          <div className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">
-                            {store.rating} ★
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center mt-1 text-sm text-gray-600">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          <span>{store.location}</span>
-                        </div>
-                        
-                        <div className="flex items-center mt-1 text-sm text-gray-600">
-                          <Clock className="w-4 h-4 mr-1" />
-                          <span>{store.hours}</span>
-                        </div>
-                        
-                        <p className="mt-2 text-sm text-gray-600">{store.description}</p>
-                        
-                        <div className="mt-3 flex flex-wrap gap-1">
-                          {store.features.map((feature, idx) => (
-                            <span 
-                              key={idx} 
-                              className="inline-block bg-gray-100 rounded-full px-2 py-1 text-xs font-medium text-gray-700"
-                            >
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                        
-                        <div className="mt-4 text-sm font-medium">
-                          Price Range: <span className="text-green-700">{store.price}</span>
+                  {filterStores("supermarket").map((store, index) => (
+                    <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="relative h-48">
+                        <img 
+                          src={store.image} 
+                          alt={store.name} 
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                          <span className="text-amber-500 mr-1">★</span>
+                          {store.rating} ({store.reviews})
                         </div>
                       </div>
-                    </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold">{store.name}</h3>
+                        <p className="text-sm text-gray-700 mb-4">{store.description}</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center text-sm">
+                            <Clock className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{store.hours}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <MapPin className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{store.location}</span>
+                          </div>
+                          <div className="flex flex-wrap gap-2 mt-3">
+                            {store.features.map((feature, i) => (
+                              <Badge key={i} variant="outline" className="bg-gray-100">
+                                {feature}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
                   ))}
                 </div>
               </TabsContent>
 
-              <TabsContent value="premium">
+              <TabsContent value="general">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filterSupermarkets().filter(store => store.price === "₹₹₹").map((store, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
-                      <img 
-                        src={store.image} 
-                        alt={store.name} 
-                        className="w-full h-48 object-cover"
-                      />
-                      <div className="p-4">
-                        <div className="flex justify-between items-start">
-                          <h3 className="text-lg font-semibold">{store.name}</h3>
-                          <div className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">
-                            {store.rating} ★
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center mt-1 text-sm text-gray-600">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          <span>{store.location}</span>
-                        </div>
-                        
-                        <div className="flex items-center mt-1 text-sm text-gray-600">
-                          <Clock className="w-4 h-4 mr-1" />
-                          <span>{store.hours}</span>
-                        </div>
-                        
-                        <p className="mt-2 text-sm text-gray-600">{store.description}</p>
-                        
-                        <div className="mt-3 flex flex-wrap gap-1">
-                          {store.features.map((feature, idx) => (
-                            <span 
-                              key={idx} 
-                              className="inline-block bg-gray-100 rounded-full px-2 py-1 text-xs font-medium text-gray-700"
-                            >
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                        
-                        <div className="mt-4 text-sm font-medium">
-                          Price Range: <span className="text-green-700">{store.price}</span>
+                  {filterStores("general").map((store, index) => (
+                    <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="relative h-48">
+                        <img 
+                          src={store.image} 
+                          alt={store.name} 
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                          <span className="text-amber-500 mr-1">★</span>
+                          {store.rating} ({store.reviews})
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="24hours">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filterSupermarkets().filter(store => store.hours.includes("24")).map((store, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
-                      <img 
-                        src={store.image} 
-                        alt={store.name} 
-                        className="w-full h-48 object-cover"
-                      />
                       <div className="p-4">
-                        <div className="flex justify-between items-start">
-                          <h3 className="text-lg font-semibold">{store.name}</h3>
-                          <div className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">
-                            {store.rating} ★
+                        <h3 className="text-lg font-bold">{store.name}</h3>
+                        <p className="text-sm text-gray-700 mb-4">{store.description}</p>
+                        <div className="space-y-2">
+                          <div className="flex items-center text-sm">
+                            <Clock className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{store.hours}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <MapPin className="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{store.location}</span>
+                          </div>
+                          <div className="flex flex-wrap gap-2 mt-3">
+                            {store.features.map((feature, i) => (
+                              <Badge key={i} variant="outline" className="bg-gray-100">
+                                {feature}
+                              </Badge>
+                            ))}
                           </div>
                         </div>
-                        
-                        <div className="flex items-center mt-1 text-sm text-gray-600">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          <span>{store.location}</span>
-                        </div>
-                        
-                        <div className="flex items-center mt-1 text-sm text-gray-600">
-                          <Clock className="w-4 h-4 mr-1" />
-                          <span>{store.hours}</span>
-                        </div>
-                        
-                        <p className="mt-2 text-sm text-gray-600">{store.description}</p>
-                        
-                        <div className="mt-3 flex flex-wrap gap-1">
-                          {store.features.map((feature, idx) => (
-                            <span 
-                              key={idx} 
-                              className="inline-block bg-gray-100 rounded-full px-2 py-1 text-xs font-medium text-gray-700"
-                            >
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                        
-                        <div className="mt-4 text-sm font-medium">
-                          Price Range: <span className="text-green-700">{store.price}</span>
-                        </div>
                       </div>
-                    </div>
+                    </Card>
                   ))}
                 </div>
               </TabsContent>
             </Tabs>
+          </div>
+        </InfoSection>
+
+        {/* Local Shopping Tips Section */}
+        <InfoSection 
+          title="Local Shopping Tips"
+          subtitle="Make the most of your shopping experience in Radhanagari"
+          className="bg-gray-50"
+        >
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-lg font-semibold mb-4">Shopping for Visitors</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <div className="bg-green-100 text-green-800 p-1 rounded-full mr-2 mt-1">
+                      <ShoppingBag className="h-4 w-4" />
+                    </div>
+                    <p className="text-sm text-gray-700">Most stores in Radhanagari town center close by 9 PM, plan your shopping accordingly.</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-green-100 text-green-800 p-1 rounded-full mr-2 mt-1">
+                      <ShoppingBag className="h-4 w-4" />
+                    </div>
+                    <p className="text-sm text-gray-700">Look for locally-made products like forest honey, spices, and handcrafts as souvenirs.</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-green-100 text-green-800 p-1 rounded-full mr-2 mt-1">
+                      <ShoppingBag className="h-4 w-4" />
+                    </div>
+                    <p className="text-sm text-gray-700">Stock up on essentials if you're staying in remote homestays or wildlife areas.</p>
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-lg font-semibold mb-4">Local Specialties</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <div className="bg-green-100 text-green-800 p-1 rounded-full mr-2 mt-1">
+                      <ShoppingBag className="h-4 w-4" />
+                    </div>
+                    <p className="text-sm text-gray-700">Try the local Kolhapuri Masala and spice mixes available at most general stores.</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-green-100 text-green-800 p-1 rounded-full mr-2 mt-1">
+                      <ShoppingBag className="h-4 w-4" />
+                    </div>
+                    <p className="text-sm text-gray-700">Many stores offer fresh produce sourced from nearby farms - perfect for cooking at homestays.</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-green-100 text-green-800 p-1 rounded-full mr-2 mt-1">
+                      <ShoppingBag className="h-4 w-4" />
+                    </div>
+                    <p className="text-sm text-gray-700">Keep cash handy as not all stores accept digital payments, especially smaller outlets.</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </InfoSection>
       </main>
