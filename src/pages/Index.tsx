@@ -103,25 +103,25 @@ const Index = () => {
     {
       name: "Mr. Rajendra Maruti Chavan",
       role: "CEO of Incite Computers",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800",
+      image: "/rajendra.png",
       description: "Founded the digital initiative to promote Radhanagari Wildlife Sanctuary globally."
     },
     {
       name: "Mr. Prashant Vanjule",
       role: "Technology Director",
-      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=800",
+      image: "/prashant.png",
       description: "Leads the technical development of the platform and digital infrastructure."
     },
     {
       name: "Mr. Sumit Chavan",
       role: "Content Manager",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800",
+      image: "/sumit.png",
       description: "Oversees all content creation and ensures accurate information about the sanctuary."
     },
     {
       name: "Mr. Pruthviraj Chavan",
       role: "Community Liaison",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800",
+      image: "/pruthvi.png",
       description: "Works with local communities to promote sustainable tourism practices."
     },
     {
