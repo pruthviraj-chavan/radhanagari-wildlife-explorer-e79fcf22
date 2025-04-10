@@ -115,13 +115,13 @@ const Index = () => {
     {
       name: "Mr. Sumit Chavan",
       role: "Content Manager",
-      image: "/sumit.png",
+      image: "/sumit.jpg",
       description: "Oversees all content creation and ensures accurate information about the sanctuary."
     },
     {
       name: "Mr. Pruthviraj Chavan",
       role: "Community Liaison",
-      image: "/pruthvi.png",
+      image: "/pruthvi.jpg",
       description: "Works with local communities to promote sustainable tourism practices."
     },
     {
